@@ -9,7 +9,7 @@
 import Foundation
 
 class QualBuilder<T>: Filtering, QualSelectable {
-    var delegate: FilterCompositor<T>?
+    weak var delegate: FilterCompositor<T>?
     let keyPath: KeyPath<T,String>
     let group: QualGroup<T>
     var selectedValues = Set<String>() {
