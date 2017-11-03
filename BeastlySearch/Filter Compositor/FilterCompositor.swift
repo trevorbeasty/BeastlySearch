@@ -8,26 +8,27 @@
 
 import Foundation
 
-class FilterCompositor<T>: FilterOutput, FilterSelection {
-    
-    //    weak var delegate: FilterCompositorDelegate?
+class FilterCompositor<T>: FilterOutput, FilterSelection, FilterBinding {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
+    private(set) var activeBindings: [((T) -> Bool) -> Void] = []
     
-    // MARK: - FilterSelector
-    var quantSelectors: [QuantSelectable] {
-        return quantBuilders as [QuantSelectable]
-    }
-    var qualSelectors: [QualSelectable] {
-        return qualBuilders as [QualSelectable]
-    }
-    var generalSearchText: String?
-    
-    func setGeneralSearchText(_ text: String?) {
-        generalSearchText = text
+    func didUpdate(_ builder: QuantBuilder<T>) {
+        executeBindings()
     }
     
+    func didUpdate(_ builder: QualBuilder<T>) {
+        executeBindings()
+    }
+    
+    private func executeBindings() {
+        activeBindings.forEach { (binding) in
+            binding(filter)
+        }
+    }
+    
+    // MARK: - Construction
     private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>]) {
         self.quantBuilders = quant
         self.qualBuilders = qual
@@ -40,12 +41,19 @@ class FilterCompositor<T>: FilterOutput, FilterSelection {
         return compositor
     }
     
-    func didUpdate(_ builder: QuantBuilder<T>) {
-        
+    // MARK: - FilterSelector
+    var quantSelectors: [QuantSelectable] {
+        return quantBuilders as [QuantSelectable]
+    }
+    var qualSelectors: [QualSelectable] {
+        return qualBuilders as [QualSelectable]
+    }
+    var generalSearchText: String? {
+        didSet { executeBindings() }
     }
     
-    func didUpdate(_ builder: QualBuilder<T>) {
-        
+    func setGeneralSearchText(_ text: String?) {
+        generalSearchText = text
     }
     
     // MARK: - FilterOutput
@@ -84,4 +92,38 @@ class FilterCompositor<T>: FilterOutput, FilterSelection {
         }
     }
     
+    // MARK: - FilterBinding
+    func bind(_ binding: @escaping (((T)) -> Bool) -> Void) {
+        activeBindings.append(binding)
+    }
+    
+    func removeBinding(atIndex index: Int) throws -> ((T) -> Bool) -> Void {
+        guard index < activeBindings.count else { throw FilterBindingError.noBindingAtIndex(index) }
+        return activeBindings.remove(at: index)
+    }
+    
+    func removeAllBindings() {
+        activeBindings.removeAll()
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

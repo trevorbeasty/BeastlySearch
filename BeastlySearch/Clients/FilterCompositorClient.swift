@@ -22,12 +22,23 @@ class FilterCompositorClient {
     static var usedCarExample: VoidClosure {
         return {
             return exampleWith(title: "Title", description: "description") {
+                // population
                 let cars = SISCar.allUsedCars()
+                SISCar.printCars(cars, title: "All cars")
+                
+                // builders & compositor
                 let mileage = QuantBuilder(keyPath: \SISCar.mileage, name: "Mileage", population: cars)
                 let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: false)
                 let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
                 let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model])
                 
+                // binding
+                filterCompositor.bind({ (carFilter) in
+                    let filteredCars = cars.filter(carFilter)
+                    SISCar.printCars(filteredCars, title: "Filtered cars:")
+                })
+                
+                // filter selection
                 mileage.selectMax(100000)
                 filterCompositor.setGeneralSearchText("i")
                 do {
@@ -37,11 +48,7 @@ class FilterCompositorClient {
                 catch {
                     print(error)
                 }
-                let filteredCars = cars.filter(filterCompositor.filter)
-    
-                SISCar.printCars(cars, title: "All cars")
-                if filteredCars.count == 0 { print("No search results") }
-                else { SISCar.printCars(filteredCars, title: "Filtered cars:") }
+
             }
         }
     }

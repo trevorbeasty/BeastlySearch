@@ -9,6 +9,7 @@
 import Foundation
 
 class QuantBuilder<T>: Filtering, QuantSelectable {
+    // client could potentially derail system by setting delegate after FilterCompositor construction
     var delegate: FilterCompositor<T>?
     let keyPath: KeyPath<T,Int>
     let group: QuantGroup<T>

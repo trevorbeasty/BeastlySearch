@@ -61,8 +61,30 @@ extension SISCar: CustomStringConvertible {
 extension SISCar {
     static func printCars(_ cars: [SISCar], title: String) {
         print("\n" + title + ":\n")
+        guard cars.count > 0 else {
+            print("zero cars")
+            return
+        }
         cars.forEach { (car) in
             print(car)
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

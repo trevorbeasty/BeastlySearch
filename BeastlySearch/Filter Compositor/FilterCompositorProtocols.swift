@@ -13,9 +13,12 @@ protocol FilterOutput: class {
     var filter: (T) -> Bool { get }
 }
 
-protocol FilterCompositorDelegate: class {
+protocol FilterBinding: class {
     associatedtype T
-    func didUpdateFilter(_ filter: (T) -> Bool)
+    var activeBindings: [((T) -> Bool) -> Void] { get }
+    func bind(_ binding: @escaping ((T) -> Bool) -> Void)
+    func removeBinding(atIndex index: Int) throws -> ((T) -> Bool) -> Void
+    func removeAllBindings()
 }
 
 protocol FilterSelection: class {

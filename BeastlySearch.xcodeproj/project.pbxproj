@@ -25,6 +25,7 @@
 		0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */; };
 		0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB01FACCBE90094B9CB /* UsedCar.swift */; };
 		0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CEB21FACCD010094B9CB /* all-used-cars.json */; };
+		0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorClient.swift; sourceTree = "<group>"; };
 		0B23CEB01FACCBE90094B9CB /* UsedCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedCar.swift; sourceTree = "<group>"; };
 		0B23CEB21FACCD010094B9CB /* all-used-cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "all-used-cars.json"; sourceTree = "<group>"; };
+		0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorErrors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
+				0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B23CE9B1FACC7BC0094B9CB /* Builders */,
 			);
@@ -345,6 +348,7 @@
 				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
+				0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L3WLY38EDC;
 				INFOPLIST_FILE = BeastlySearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BeastlyCreations.BeastlySearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -528,6 +533,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = L3WLY38EDC;
 				INFOPLIST_FILE = BeastlySearch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BeastlyCreations.BeastlySearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
