@@ -26,6 +26,12 @@
 		0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB01FACCBE90094B9CB /* UsedCar.swift */; };
 		0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CEB21FACCD010094B9CB /* all-used-cars.json */; };
 		0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */; };
+		0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */; };
+		0B23CEBA1FAD102C0094B9CB /* FilterSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB91FAD102C0094B9CB /* FilterSelectorViewController.swift */; };
+		0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEBC1FAD18F90094B9CB /* FilterSelectorPresenter.swift */; };
+		0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */; };
+		0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */; };
+		0B23CEC51FAD2E330094B9CB /* FilterSelectorSceneClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +77,12 @@
 		0B23CEB01FACCBE90094B9CB /* UsedCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedCar.swift; sourceTree = "<group>"; };
 		0B23CEB21FACCD010094B9CB /* all-used-cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "all-used-cars.json"; sourceTree = "<group>"; };
 		0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorErrors.swift; sourceTree = "<group>"; };
+		0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantFilterCell.swift; sourceTree = "<group>"; };
+		0B23CEB91FAD102C0094B9CB /* FilterSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorViewController.swift; sourceTree = "<group>"; };
+		0B23CEBC1FAD18F90094B9CB /* FilterSelectorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorPresenter.swift; sourceTree = "<group>"; };
+		0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualFilterCell.swift; sourceTree = "<group>"; };
+		0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorRouter.swift; sourceTree = "<group>"; };
+		0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorSceneClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +133,8 @@
 		0B23CE661FACC64B0094B9CB /* BeastlySearch */ = {
 			isa = PBXGroup;
 			children = (
-				0B23CEAC1FACC9640094B9CB /* Clients */,
-				0B23CE991FACC70B0094B9CB /* Views */,
+				0B23CEC01FAD2A460094B9CB /* Filter Selector Scene */,
+				0B23CEAC1FACC9640094B9CB /* Example Clients */,
 				0B23CE981FACC7070094B9CB /* Filter Compositor */,
 				0B23CE671FACC64B0094B9CB /* AppDelegate.swift */,
 				0B23CE6B1FACC64B0094B9CB /* Main.storyboard */,
@@ -166,6 +178,9 @@
 		0B23CE991FACC70B0094B9CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B23CEB91FAD102C0094B9CB /* FilterSelectorViewController.swift */,
+				0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */,
+				0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,13 +198,14 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
-		0B23CEAC1FACC9640094B9CB /* Clients */ = {
+		0B23CEAC1FACC9640094B9CB /* Example Clients */ = {
 			isa = PBXGroup;
 			children = (
 				0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */,
+				0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */,
 				0B23CEAF1FACCBC20094B9CB /* Used Car */,
 			);
-			path = Clients;
+			path = "Example Clients";
 			sourceTree = "<group>";
 		};
 		0B23CEAF1FACCBC20094B9CB /* Used Car */ = {
@@ -199,6 +215,32 @@
 				0B23CEB21FACCD010094B9CB /* all-used-cars.json */,
 			);
 			path = "Used Car";
+			sourceTree = "<group>";
+		};
+		0B23CEBB1FAD18CF0094B9CB /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CEBC1FAD18F90094B9CB /* FilterSelectorPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0B23CEC01FAD2A460094B9CB /* Filter Selector Scene */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CEC11FAD2A5C0094B9CB /* Router */,
+				0B23CE991FACC70B0094B9CB /* Views */,
+				0B23CEBB1FAD18CF0094B9CB /* Presenter */,
+			);
+			path = "Filter Selector Scene";
+			sourceTree = "<group>";
+		};
+		0B23CEC11FAD2A5C0094B9CB /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,16 +381,22 @@
 				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
 				0B23CE701FACC64B0094B9CB /* BeastlySearch.xcdatamodeld in Sources */,
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
+				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
+				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
 				0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
+				0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */,
 				0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */,
 				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
 				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
 				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
+				0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */,
 				0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */,
+				0B23CEC51FAD2E330094B9CB /* FilterSelectorSceneClient.swift in Sources */,
+				0B23CEBA1FAD102C0094B9CB /* FilterSelectorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
