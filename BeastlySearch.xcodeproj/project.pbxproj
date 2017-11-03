@@ -8,13 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE671FACC64B0094B9CB /* AppDelegate.swift */; };
-		0B23CE6A1FACC64B0094B9CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE691FACC64B0094B9CB /* ViewController.swift */; };
 		0B23CE6D1FACC64B0094B9CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE6B1FACC64B0094B9CB /* Main.storyboard */; };
 		0B23CE701FACC64B0094B9CB /* BeastlySearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE6E1FACC64B0094B9CB /* BeastlySearch.xcdatamodeld */; };
 		0B23CE721FACC64B0094B9CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE711FACC64B0094B9CB /* Assets.xcassets */; };
 		0B23CE751FACC64B0094B9CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */; };
 		0B23CE801FACC64C0094B9CB /* BeastlySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE7F1FACC64C0094B9CB /* BeastlySearchTests.swift */; };
 		0B23CE8B1FACC64C0094B9CB /* BeastlySearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */; };
+		0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */; };
+		0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */; };
+		0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */; };
+		0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA21FACC8230094B9CB /* QuantGroup.swift */; };
+		0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */; };
+		0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA61FACC8380094B9CB /* QualGroup.swift */; };
+		0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */; };
+		0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */; };
+		0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */; };
+		0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB01FACCBE90094B9CB /* UsedCar.swift */; };
+		0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CEB21FACCD010094B9CB /* all-used-cars.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +47,6 @@
 /* Begin PBXFileReference section */
 		0B23CE641FACC64B0094B9CB /* BeastlySearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeastlySearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B23CE671FACC64B0094B9CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B23CE691FACC64B0094B9CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0B23CE6C1FACC64B0094B9CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B23CE6F1FACC64B0094B9CB /* BeastlySearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BeastlySearch.xcdatamodel; sourceTree = "<group>"; };
 		0B23CE711FACC64B0094B9CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +58,17 @@
 		0B23CE861FACC64C0094B9CB /* BeastlySearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeastlySearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeastlySearchUITests.swift; sourceTree = "<group>"; };
 		0B23CE8C1FACC64C0094B9CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocols.swift; sourceTree = "<group>"; };
+		0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorProtocols.swift; sourceTree = "<group>"; };
+		0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantBuilder.swift; sourceTree = "<group>"; };
+		0B23CEA21FACC8230094B9CB /* QuantGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantGroup.swift; sourceTree = "<group>"; };
+		0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualBuilder.swift; sourceTree = "<group>"; };
+		0B23CEA61FACC8380094B9CB /* QualGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualGroup.swift; sourceTree = "<group>"; };
+		0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderErrors.swift; sourceTree = "<group>"; };
+		0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositor.swift; sourceTree = "<group>"; };
+		0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorClient.swift; sourceTree = "<group>"; };
+		0B23CEB01FACCBE90094B9CB /* UsedCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedCar.swift; sourceTree = "<group>"; };
+		0B23CEB21FACCD010094B9CB /* all-used-cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "all-used-cars.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +119,10 @@
 		0B23CE661FACC64B0094B9CB /* BeastlySearch */ = {
 			isa = PBXGroup;
 			children = (
+				0B23CEAC1FACC9640094B9CB /* Clients */,
+				0B23CE991FACC70B0094B9CB /* Views */,
+				0B23CE981FACC7070094B9CB /* Filter Compositor */,
 				0B23CE671FACC64B0094B9CB /* AppDelegate.swift */,
-				0B23CE691FACC64B0094B9CB /* ViewController.swift */,
 				0B23CE6B1FACC64B0094B9CB /* Main.storyboard */,
 				0B23CE711FACC64B0094B9CB /* Assets.xcassets */,
 				0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */,
@@ -126,6 +148,54 @@
 				0B23CE8C1FACC64C0094B9CB /* Info.plist */,
 			);
 			path = BeastlySearchUITests;
+			sourceTree = "<group>";
+		};
+		0B23CE981FACC7070094B9CB /* Filter Compositor */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
+				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
+				0B23CE9B1FACC7BC0094B9CB /* Builders */,
+			);
+			path = "Filter Compositor";
+			sourceTree = "<group>";
+		};
+		0B23CE991FACC70B0094B9CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0B23CE9B1FACC7BC0094B9CB /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */,
+				0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */,
+				0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */,
+				0B23CEA21FACC8230094B9CB /* QuantGroup.swift */,
+				0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */,
+				0B23CEA61FACC8380094B9CB /* QualGroup.swift */,
+			);
+			path = Builders;
+			sourceTree = "<group>";
+		};
+		0B23CEAC1FACC9640094B9CB /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */,
+				0B23CEAF1FACCBC20094B9CB /* Used Car */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		0B23CEAF1FACCBC20094B9CB /* Used Car */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CEB01FACCBE90094B9CB /* UsedCar.swift */,
+				0B23CEB21FACCD010094B9CB /* all-used-cars.json */,
+			);
+			path = "Used Car";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +308,7 @@
 				0B23CE751FACC64B0094B9CB /* LaunchScreen.storyboard in Resources */,
 				0B23CE721FACC64B0094B9CB /* Assets.xcassets in Resources */,
 				0B23CE6D1FACC64B0094B9CB /* Main.storyboard in Resources */,
+				0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,9 +333,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B23CE6A1FACC64B0094B9CB /* ViewController.swift in Sources */,
+				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
 				0B23CE701FACC64B0094B9CB /* BeastlySearch.xcdatamodeld in Sources */,
+				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
+				0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */,
+				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
+				0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */,
+				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
+				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
+				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
+				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
+				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
