@@ -9,7 +9,13 @@
 import UIKit
 
 protocol OpenClose {
-    var isOpen: Bool { get }
+    var isOpen: Bool { get set }
+}
+
+extension OpenClose {
+    mutating func toggleIsOpen() {
+        isOpen = !isOpen
+    }
 }
 
 enum SectionType {
@@ -40,7 +46,7 @@ struct QualSectionInfo: OpenClose {
     let values: [String]
     var isOpen: Bool
     
-    init(name: String, values: [String], isOpen: Bool = true) {
+    init(name: String, values: [String], isOpen: Bool = false) {
         self.name = name
         self.values = values
         self.isOpen = isOpen
@@ -52,16 +58,21 @@ protocol FilterSelectorViewControllerOutput: class {
     func didDeselectValue(_ value: String, forIndex index: Int)
 }
 
+fileprivate struct Constants {
+    static let quantCellID = "QuantFilterCell"
+    static let qualCellID = "QualFilterCell"
+    static let quantHeaderID = "QuantHeaderView"
+    static let qualHeaderID = "QualHeaderView"
+}
+
 class FilterSelectorViewController: UIViewController {
 
     var presenter: (FilterSelectorViewControllerOutput & QuantFilterCellOutput)?
     
     fileprivate let tableView = UITableView()
     
-    let sections: [SectionType]
+    var sections: [SectionType]
     fileprivate var selectedPaths = Set<IndexPath>()
-    fileprivate let quantCellID = "QuantFilterCell"
-    fileprivate let qualCellID = "QualFilterCell"
     
     init(sections: [SectionType]) {
         self.sections = sections
@@ -102,8 +113,10 @@ class FilterSelectorViewController: UIViewController {
     private func setUpTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(QuantFilterCell.self, forCellReuseIdentifier: quantCellID)
-        tableView.register(QualFilterCell.self, forCellReuseIdentifier: qualCellID)
+        tableView.register(QuantFilterCell.self, forCellReuseIdentifier: Constants.quantCellID)
+        tableView.register(QualFilterCell.self, forCellReuseIdentifier: Constants.qualCellID)
+        tableView.register(QuantHeaderView.self, forHeaderFooterViewReuseIdentifier: Constants.quantHeaderID)
+        tableView.register(QualHeaderView.self, forHeaderFooterViewReuseIdentifier: Constants.qualHeaderID)
     }
 
 }
@@ -125,17 +138,46 @@ extension FilterSelectorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch sections[indexPath.section] {
         case .quant(let quantInfo):
-            let cell = tableView.dequeueReusableCell(withIdentifier: quantCellID, for: indexPath) as! QuantFilterCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.quantCellID, for: indexPath) as! QuantFilterCell
             cell.configure(quantInfo: quantInfo, index: indexPath.section, delegate: presenter)
             return cell
             
         case .qual(let qualInfo):
-            let cell = tableView.dequeueReusableCell(withIdentifier: qualCellID, for: indexPath) as! QualFilterCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.qualCellID, for: indexPath) as! QualFilterCell
             let value = qualInfo.values[indexPath.row]
             let selected = selectedPaths.contains(indexPath)
             cell.configure(value, selected: selected)
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch sections[section] {
+        case .quant(let quantInfo):
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.quantHeaderID) as! QuantHeaderView
+            header.configure(index: section, delegate: self)
+            header.configure(quantInfo: quantInfo)
+            return header
+        
+        case .qual(let qualInfo):
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.qualHeaderID) as! QualHeaderView
+            header.configure(index: section, delegate: self)
+            header.configure(qualInfo: qualInfo)
+            return header
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch sections[indexPath.section] {
+        case .quant(_):
+            return 120
+        case .qual(_):
+            return 44
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 80
     }
 }
 
@@ -156,6 +198,20 @@ extension FilterSelectorViewController: UITableViewDelegate {
                 presenter?.didSelectValue(value, forIndex: index)
                 cell?.configure(true)
             }
+        default:
+            break
+        }
+    }
+}
+
+extension FilterSelectorViewController: FilterSelectorHeaderViewDelegate {
+    func didTapSectionWithIndex(_ index: Int) {
+        print("did tap: \(index)")
+        switch sections[index] {
+        case .qual(var qualInfo):
+            qualInfo.toggleIsOpen()
+            sections[index] = SectionType.qual(qualInfo)
+            tableView.reloadData()
         default:
             break
         }

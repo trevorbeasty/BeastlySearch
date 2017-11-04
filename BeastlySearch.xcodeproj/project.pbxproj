@@ -32,6 +32,9 @@
 		0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */; };
 		0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */; };
 		0B23CEC51FAD2E330094B9CB /* FilterSelectorSceneClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */; };
+		0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */; };
+		0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */; };
+		0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualFilterCell.swift; sourceTree = "<group>"; };
 		0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorRouter.swift; sourceTree = "<group>"; };
 		0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorSceneClient.swift; sourceTree = "<group>"; };
+		0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantHeaderView.swift; sourceTree = "<group>"; };
+		0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualHeaderView.swift; sourceTree = "<group>"; };
+		0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +187,9 @@
 				0B23CEB91FAD102C0094B9CB /* FilterSelectorViewController.swift */,
 				0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */,
 				0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */,
+				0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */,
+				0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */,
+				0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -384,9 +393,12 @@
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
+				0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */,
 				0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
+				0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */,
 				0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */,
+				0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */,
 				0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */,
 				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
 				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
