@@ -27,8 +27,9 @@ class QualFilterCell: UITableViewCell {
         contentView.addSubview(label)
         
         let constraints: [NSLayoutConstraint] = [
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            label.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 32)
+            label.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            label.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor, constant: 32),
+            label.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor)
         ]
         constraints.forEach({ $0.isActive = true })
     }

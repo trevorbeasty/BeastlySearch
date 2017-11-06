@@ -23,8 +23,8 @@ class FilterSelectorRouter {
     static func sectionsForSelectors(_ selectors: [FilterSelectorType]) -> [SectionType] {
         return selectors.map { (selector) -> SectionType in
             switch selector {
-            case .quant(let quantSelectable):
-                let quantInfo = QuantSectionInfo(name: quantSelectable.name, min: quantSelectable.min, max: quantSelectable.max)
+            case .quant(let quant):
+                let quantInfo = QuantSectionInfo(quant: quant)
                 return SectionType.quant(quantInfo)
                 
             case .qual(let qualSelectable):

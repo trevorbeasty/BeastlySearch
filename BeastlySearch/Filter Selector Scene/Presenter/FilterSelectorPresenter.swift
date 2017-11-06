@@ -9,7 +9,7 @@
 import Foundation
 
 enum FilterSelectorType {
-    case quant(QuantSelectable)
+    case quant(QuantSelectable & QuantExpressive)
     case qual(QualSelectable)
 }
 

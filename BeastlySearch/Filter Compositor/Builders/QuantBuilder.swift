@@ -8,11 +8,13 @@
 
 import Foundation
 
-class QuantBuilder<T>: Filtering, QuantSelectable {
+class QuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive {
     // client could potentially derail system by setting delegate after FilterCompositor construction
     weak var delegate: FilterCompositor<T>?
     let keyPath: KeyPath<T,Int>
     let group: QuantGroup<T>
+    let converter: IntConverter
+    let increment: Int
     var selectedMin: Int? {
         didSet { delegate?.didUpdate(self) }
     }
@@ -20,15 +22,17 @@ class QuantBuilder<T>: Filtering, QuantSelectable {
         didSet { delegate?.didUpdate(self) }
     }
     
-    init(keyPath: KeyPath<T,Int>, group: QuantGroup<T>) {
+    init(keyPath: KeyPath<T,Int>, group: QuantGroup<T>, converter: IntConverter? = nil, increment: Int = 1) {
         self.keyPath = keyPath
         self.group = group
+        self.converter = converter ?? { String($0) }
+        self.increment = increment
     }
     
-    convenience init(keyPath: KeyPath<T,Int>, name: String, population: [T]) {
+    convenience init(keyPath: KeyPath<T,Int>, name: String, population: [T], converter: IntConverter? = nil, increment: Int = 1) {
         let values = QuantBuilder.valuesFor(keyPath: keyPath, population: population)
         let group = QuantGroup<T>(name: name, min: values.0, max: values.1)
-        self.init(keyPath: keyPath, group: group)
+        self.init(keyPath: keyPath, group: group, converter: converter, increment: increment)
     }
     
     private static func valuesFor(keyPath: KeyPath<T,Int>, population: [T]) -> (Int, Int) {

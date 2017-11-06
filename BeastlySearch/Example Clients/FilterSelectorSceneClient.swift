@@ -8,6 +8,27 @@
 
 import Foundation
 
+extension Int {
+    var commaFormattedString: String {
+        guard self != 0 else { return "0" }
+        var value = self
+        var string = ""
+        while value > 0 {
+            let currentValue = value % 1000
+            value = value / 1000
+            var currentString = String(currentValue)
+            if value > 0 {
+                let zeroesCount = 3 - currentString.characters.count
+                let zeroesString = String(repeating: "0", count: zeroesCount)
+                currentString = zeroesString + currentString
+            }
+            string = "," + String(currentString) + string
+        }
+        if string.characters.count > 3 { string.removeFirst() }
+        return string
+    }
+}
+
 class FilterSelectorSceneClient {
     
     // must be persisted, otherwise will deallocate following setup and bindings will not be called
@@ -15,11 +36,20 @@ class FilterSelectorSceneClient {
     
     static var usedCarsFilterSelectorScene: FilterSelectorViewController {
         let cars = SISCar.allUsedCars()
-        let mileage = QuantBuilder(keyPath: \SISCar.mileage, name: "Mileage", population: cars)
+        let mileageConverter: IntConverter = { value -> String in
+            let miles = value == 1 ? "mile" : "miles"
+            return "\(value.commaFormattedString) \(miles)"
+        }
+        let mileage = QuantBuilder(keyPath: \SISCar.mileage, name: "Mileage", population: cars, converter: mileageConverter, increment: 1000)
+        let priceConverter: IntConverter = { value -> String in
+            return "$\(value.commaFormattedString)"
+        }
+        let price = QuantBuilder(keyPath: \SISCar.price, name: "Price", population: cars, converter: priceConverter, increment: 100)
         let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: true)
         let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
-        let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model])
+        let filterCompositor = FilterCompositor.compositorFor(quant: [price, mileage], qual: [brand, model])
         let selectors: [FilterSelectorType] = [
+            FilterSelectorType.quant(price),
             FilterSelectorType.quant(mileage),
             FilterSelectorType.qual(brand),
             FilterSelectorType.qual(model)

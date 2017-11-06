@@ -19,9 +19,9 @@ class QuantFilterCell: UITableViewCell {
     fileprivate let upperValueLabel = UILabel()
     fileprivate let slider = UISlider()
     
+    fileprivate var info: QuantSectionInfo?
     fileprivate var index: Int?
     fileprivate var delegate: QuantFilterCellOutput?
-    fileprivate var increment: Int = 1000
     fileprivate var lastValue: Int?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -40,7 +40,6 @@ class QuantFilterCell: UITableViewCell {
         views.forEach { (view) in
             contentView.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
-            view.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         }
         
         let labels = [lowerValueLabel, upperValueLabel]
@@ -48,20 +47,35 @@ class QuantFilterCell: UITableViewCell {
             label.widthAnchor.constraint(equalToConstant: 80)
         }
         
-        let width: CGFloat = 80
+        let height: CGFloat = 44
+        let sliderInset: CGFloat = 32
         let constraints: [NSLayoutConstraint] = [
-            lowerValueLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 4),
-            lowerValueLabel.rightAnchor.constraint(equalTo: slider.leftAnchor, constant: -16),
-            lowerValueLabel.widthAnchor.constraint(equalToConstant: width),
-            slider.rightAnchor.constraint(equalTo: upperValueLabel.leftAnchor, constant: -16),
-            upperValueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -4),
-            upperValueLabel.widthAnchor.constraint(equalToConstant: width)
+            slider.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            slider.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor, constant: sliderInset),
+            slider.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor, constant: -1 * sliderInset),
+            lowerValueLabel.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8),
+            lowerValueLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
+            lowerValueLabel.rightAnchor.constraint(equalTo: upperValueLabel.leftAnchor, constant: -8),
+            lowerValueLabel.widthAnchor.constraint(equalTo: upperValueLabel.widthAnchor, multiplier: 1.0),
+            lowerValueLabel.heightAnchor.constraint(equalToConstant: height),
+            lowerValueLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            upperValueLabel.topAnchor.constraint(equalTo: lowerValueLabel.topAnchor),
+            upperValueLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor),
+            upperValueLabel.heightAnchor.constraint(equalToConstant: height)
         ]
         constraints.forEach({ $0.isActive = true })
+        
+        let border: CGFloat = 0
+        contentView.layoutMargins = UIEdgeInsets(top: border, left: border, bottom: border, right: border)
     }
     
     private func styleViews() {
         selectionStyle = .none
+        
+        let labels = [lowerValueLabel, upperValueLabel]
+        labels.forEach({ label in
+            label.textAlignment = .center
+        })
     }
     
     private func setUpSlider() {
@@ -69,7 +83,7 @@ class QuantFilterCell: UITableViewCell {
     }
     
     @objc private func sliderValueDidChange(slider: UISlider) {
-        guard let index = index else { return }
+        guard let index = index, let increment = info?.increment else { return }
         let currentValue = Int(slider.value)
         // throttle
         if let lastValue = lastValue {
@@ -95,22 +109,20 @@ class QuantFilterCell: UITableViewCell {
             }
         }
         else {
-            updateLabelText(lower: Int(slider.minimumValue), upper: Int(slider.maximumValue))
+//            print("\n\n\(slider.maximumValue)\n\n")
+            let initialMax = (Int(slider.maximumValue) / increment) * increment + increment
+            updateLabelText(lower: Int(slider.minimumValue), upper: initialMax)
         }
         lastValue = currentValue
     }
     
     private func updateLabelText(lower: Int, upper: Int) {
-        lowerValueLabel.text = String(lower)
-        upperValueLabel.text = String(upper)
-    }
-    
-    private func roundedValue(_ value: Int) -> Int {
-        // always rounds down
-        return (value / increment) * increment
+        lowerValueLabel.text = info?.converter(lower)
+        upperValueLabel.text = info?.converter(upper)
     }
     
     func configure(quantInfo: QuantSectionInfo, index: Int, delegate: QuantFilterCellOutput?) {
+        self.info = quantInfo
         slider.maximumValue = Float(quantInfo.max)
         slider.setValue(Float(quantInfo.selectedMax ?? quantInfo.max), animated: false)
         self.index = index
