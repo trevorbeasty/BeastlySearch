@@ -9,6 +9,7 @@
 import Foundation
 
 struct SISCar {
+    let id: Int
     let year: String
     let make: String
     let model: String
@@ -41,7 +42,9 @@ extension SISCar {
     }
     
     init?(jsonDict: JSONDict) {
-        guard let year = jsonDict["year"] as? String,
+        guard
+            let id = jsonDict["id"] as? Int,
+            let year = jsonDict["year"] as? String,
             let make = jsonDict["make"] as? String,
             let model = jsonDict["model"] as? String,
             let mileage = jsonDict["mileage"] as? Int,
@@ -50,13 +53,13 @@ extension SISCar {
                 return nil
         }
         let imagePaths = images.flatMap { $0["path"] as? String }
-        self.init(year: year, make: make, model: model, mileage: mileage, price: price, imagePaths: imagePaths)
+        self.init(id: id, year: year, make: make, model: model, mileage: mileage, price: price, imagePaths: imagePaths)
     }
 }
 
 extension SISCar: CustomStringConvertible {
     public var description: String {
-        return "\(year) \(make) \(model), mileage: \(mileage) miles"
+        return "\(id) - \(year) \(make) \(model), mileage: \(mileage) miles"
     }
 }
 

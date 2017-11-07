@@ -29,6 +29,12 @@ protocol QuantSelectable {
     func selectMax(_ value: Int)
 }
 
+extension QuantSelectable {
+    func summarize() {
+        print("name: \(name), min: \(min), max: \(max)")
+    }
+}
+
 // (baseString, searchText) -> Bool
 typealias TextSearchPredicate = (String, String) -> Bool
 

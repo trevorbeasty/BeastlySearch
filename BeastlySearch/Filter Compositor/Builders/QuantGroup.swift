@@ -13,3 +13,9 @@ struct QuantGroup<T> {
     let min: Int
     let max: Int
 }
+
+extension QuantGroup: CustomStringConvertible {
+    var description: String {
+        return "quant group: \(name), min: \(min), max: \(max)"
+    }
+}

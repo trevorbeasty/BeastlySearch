@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE671FACC64B0094B9CB /* AppDelegate.swift */; };
 		0B23CE6D1FACC64B0094B9CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE6B1FACC64B0094B9CB /* Main.storyboard */; };
-		0B23CE701FACC64B0094B9CB /* BeastlySearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE6E1FACC64B0094B9CB /* BeastlySearch.xcdatamodeld */; };
+		0B23CE701FACC64B0094B9CB /* SISCar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE6E1FACC64B0094B9CB /* SISCar.xcdatamodeld */; };
 		0B23CE721FACC64B0094B9CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE711FACC64B0094B9CB /* Assets.xcassets */; };
 		0B23CE751FACC64B0094B9CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */; };
 		0B23CE801FACC64C0094B9CB /* BeastlySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE7F1FACC64C0094B9CB /* BeastlySearchTests.swift */; };
@@ -23,7 +23,7 @@
 		0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */; };
 		0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */; };
 		0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */; };
-		0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB01FACCBE90094B9CB /* UsedCar.swift */; };
+		0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB01FACCBE90094B9CB /* SISCar.swift */; };
 		0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CEB21FACCD010094B9CB /* all-used-cars.json */; };
 		0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */; };
 		0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */; };
@@ -35,6 +35,12 @@
 		0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */; };
 		0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */; };
 		0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */; };
+		0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */; };
+		0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */; };
+		0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725731FB23F7E00526083 /* CoreDataClient.swift */; };
+		0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725781FB2411C00526083 /* CarCoreDataManager.swift */; };
+		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
+		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +83,7 @@
 		0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderErrors.swift; sourceTree = "<group>"; };
 		0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositor.swift; sourceTree = "<group>"; };
 		0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorClient.swift; sourceTree = "<group>"; };
-		0B23CEB01FACCBE90094B9CB /* UsedCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedCar.swift; sourceTree = "<group>"; };
+		0B23CEB01FACCBE90094B9CB /* SISCar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SISCar.swift; sourceTree = "<group>"; };
 		0B23CEB21FACCD010094B9CB /* all-used-cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "all-used-cars.json"; sourceTree = "<group>"; };
 		0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorErrors.swift; sourceTree = "<group>"; };
 		0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantFilterCell.swift; sourceTree = "<group>"; };
@@ -89,6 +95,12 @@
 		0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantHeaderView.swift; sourceTree = "<group>"; };
 		0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualHeaderView.swift; sourceTree = "<group>"; };
 		0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorHeaderView.swift; sourceTree = "<group>"; };
+		0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0B6725731FB23F7E00526083 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
+		0B6725781FB2411C00526083 /* CarCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCoreDataManager.swift; sourceTree = "<group>"; };
+		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +131,7 @@
 		0B23CE5B1FACC64B0094B9CB = {
 			isa = PBXGroup;
 			children = (
+				0B67257A1FB242AA00526083 /* Default-568h@2x.png */,
 				0B23CE661FACC64B0094B9CB /* BeastlySearch */,
 				0B23CE7E1FACC64C0094B9CB /* BeastlySearchTests */,
 				0B23CE891FACC64C0094B9CB /* BeastlySearchUITests */,
@@ -139,15 +152,11 @@
 		0B23CE661FACC64B0094B9CB /* BeastlySearch */ = {
 			isa = PBXGroup;
 			children = (
+				0B23CE761FACC64B0094B9CB /* Info.plist */,
+				0B6725751FB23FE500526083 /* Shared */,
 				0B23CEC01FAD2A460094B9CB /* Filter Selector Scene */,
 				0B23CEAC1FACC9640094B9CB /* Example Clients */,
 				0B23CE981FACC7070094B9CB /* Filter Compositor */,
-				0B23CE671FACC64B0094B9CB /* AppDelegate.swift */,
-				0B23CE6B1FACC64B0094B9CB /* Main.storyboard */,
-				0B23CE711FACC64B0094B9CB /* Assets.xcassets */,
-				0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */,
-				0B23CE761FACC64B0094B9CB /* Info.plist */,
-				0B23CE6E1FACC64B0094B9CB /* BeastlySearch.xcdatamodeld */,
 			);
 			path = BeastlySearch;
 			sourceTree = "<group>";
@@ -177,6 +186,7 @@
 				0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B23CE9B1FACC7BC0094B9CB /* Builders */,
+				0B67257C1FB253AD00526083 /* Core Data */,
 			);
 			path = "Filter Compositor";
 			sourceTree = "<group>";
@@ -212,6 +222,7 @@
 			children = (
 				0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */,
 				0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */,
+				0B6725731FB23F7E00526083 /* CoreDataClient.swift */,
 				0B23CEAF1FACCBC20094B9CB /* Used Car */,
 			);
 			path = "Example Clients";
@@ -220,8 +231,12 @@
 		0B23CEAF1FACCBC20094B9CB /* Used Car */ = {
 			isa = PBXGroup;
 			children = (
-				0B23CEB01FACCBE90094B9CB /* UsedCar.swift */,
+				0B23CEB01FACCBE90094B9CB /* SISCar.swift */,
+				0B6725781FB2411C00526083 /* CarCoreDataManager.swift */,
+				0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */,
+				0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */,
 				0B23CEB21FACCD010094B9CB /* all-used-cars.json */,
+				0B23CE6E1FACC64B0094B9CB /* SISCar.xcdatamodeld */,
 			);
 			path = "Used Car";
 			sourceTree = "<group>";
@@ -250,6 +265,25 @@
 				0B23CEC21FAD2A9A0094B9CB /* FilterSelectorRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		0B6725751FB23FE500526083 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				0B23CE671FACC64B0094B9CB /* AppDelegate.swift */,
+				0B23CE6B1FACC64B0094B9CB /* Main.storyboard */,
+				0B23CE711FACC64B0094B9CB /* Assets.xcassets */,
+				0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		0B67257C1FB253AD00526083 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +396,7 @@
 				0B23CE751FACC64B0094B9CB /* LaunchScreen.storyboard in Resources */,
 				0B23CE721FACC64B0094B9CB /* Assets.xcassets in Resources */,
 				0B23CE6D1FACC64B0094B9CB /* Main.storyboard in Resources */,
+				0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */,
 				0B23CEB31FACCD010094B9CB /* all-used-cars.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,14 +423,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
-				0B23CE701FACC64B0094B9CB /* BeastlySearch.xcdatamodeld in Sources */,
+				0B23CE701FACC64B0094B9CB /* SISCar.xcdatamodeld in Sources */,
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
 				0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */,
-				0B23CEB11FACCBE90094B9CB /* UsedCar.swift in Sources */,
+				0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */,
+				0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
+				0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */,
 				0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */,
 				0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */,
 				0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */,
@@ -403,10 +440,13 @@
 				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
 				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
 				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
+				0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */,
+				0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
 				0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */,
 				0B23CEB61FACE0DF0094B9CB /* FilterCompositorErrors.swift in Sources */,
+				0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */,
 				0B23CEC51FAD2E330094B9CB /* FilterSelectorSceneClient.swift in Sources */,
 				0B23CEBA1FAD102C0094B9CB /* FilterSelectorViewController.swift in Sources */,
 			);
@@ -710,13 +750,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		0B23CE6E1FACC64B0094B9CB /* BeastlySearch.xcdatamodeld */ = {
+		0B23CE6E1FACC64B0094B9CB /* SISCar.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				0B23CE6F1FACC64B0094B9CB /* BeastlySearch.xcdatamodel */,
 			);
 			currentVersion = 0B23CE6F1FACC64B0094B9CB /* BeastlySearch.xcdatamodel */;
-			path = BeastlySearch.xcdatamodeld;
+			path = SISCar.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
