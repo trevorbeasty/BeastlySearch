@@ -13,6 +13,7 @@ struct SISCar {
     let make: String
     let model: String
     let mileage: Int
+    let price: Int
     let imagePaths: [String]
 }
 
@@ -44,11 +45,12 @@ extension SISCar {
             let make = jsonDict["make"] as? String,
             let model = jsonDict["model"] as? String,
             let mileage = jsonDict["mileage"] as? Int,
+            let price = jsonDict["price"] as? Int,
             let images = jsonDict["images"] as? [JSONDict] else {
                 return nil
         }
         let imagePaths = images.flatMap { $0["path"] as? String }
-        self.init(year: year, make: make, model: model, mileage: mileage, imagePaths: imagePaths)
+        self.init(year: year, make: make, model: model, mileage: mileage, price: price, imagePaths: imagePaths)
     }
 }
 

@@ -35,7 +35,7 @@ class FilterCompositorClient {
                 // binding
                 filterCompositor.bind({ (carFilter) in
                     let filteredCars = cars.filter(carFilter)
-                    SISCar.printCars(filteredCars, title: "Filtered cars:")
+                    SISCar.printCars(filteredCars, title: "Filtered cars")
                 })
                 
                 // filter selection

@@ -13,6 +13,12 @@ protocol Filtering {
     var filter: (T) -> Bool { get }
 }
 
+typealias IntConverter = (Int) -> String
+protocol QuantExpressive {
+    var converter: IntConverter { get }
+    var increment: Int { get }
+}
+
 protocol QuantSelectable {
     var name: String { get }
     var min: Int { get }
