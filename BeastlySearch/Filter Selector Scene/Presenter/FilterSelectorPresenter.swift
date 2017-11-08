@@ -8,9 +8,10 @@
 
 import Foundation
 
-enum FilterSelectorType {
+enum SelectorType {
     case quant(QuantSelectable & QuantExpressive)
     case qual(QualSelectable)
+    case sort([SortSelectable])
 }
 
 enum FilterSelectorPresenterError: Error {
@@ -20,10 +21,10 @@ enum FilterSelectorPresenterError: Error {
 
 class FilterSelectorPresenter: QuantFilterCellOutput, FilterSelectorViewControllerOutput {
     
-    let filterSelectors: [FilterSelectorType]
+    let selectors: [SelectorType]
     
-    init(filterSelectors: [FilterSelectorType]) {
-        self.filterSelectors = filterSelectors
+    init(selectors: [SelectorType]) {
+        self.selectors = selectors
     }
     
     // MARK: - FilterSelectorViewControllerOutput
@@ -48,7 +49,7 @@ class FilterSelectorPresenter: QuantFilterCellOutput, FilterSelectorViewControll
     }
     
     private func qualSelectableForIndex(_ index: Int) throws -> QualSelectable {
-        switch filterSelectors[index] {
+        switch selectors[index] {
         case .qual(let qualSelectable):
             return qualSelectable
         default:
@@ -78,7 +79,7 @@ class FilterSelectorPresenter: QuantFilterCellOutput, FilterSelectorViewControll
     }
     
     private func quantSelectableForIndex(_ index: Int) throws -> QuantSelectable {
-        switch filterSelectors[index] {
+        switch selectors[index] {
         case .quant(let quantSelectable):
             return quantSelectable
         default:

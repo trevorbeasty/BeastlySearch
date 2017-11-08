@@ -43,6 +43,8 @@
 		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
 		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
 		0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639421FB39F2C000AD521 /* SortBuilder.swift */; };
+		0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */; };
+		0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639481FB3B75D000AD521 /* SortHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +107,8 @@
 		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
 		0BA639421FB39F2C000AD521 /* SortBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBuilder.swift; sourceTree = "<group>"; };
+		0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorVCSections.swift; sourceTree = "<group>"; };
+		0BA639481FB3B75D000AD521 /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,12 +201,14 @@
 		0B23CE991FACC70B0094B9CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */,
 				0B23CEB91FAD102C0094B9CB /* FilterSelectorViewController.swift */,
 				0B23CEB71FAD0C930094B9CB /* QuantFilterCell.swift */,
 				0B23CEBE1FAD20350094B9CB /* QualFilterCell.swift */,
 				0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */,
 				0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */,
 				0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */,
+				0BA639481FB3B75D000AD521 /* SortHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -436,9 +442,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */,
 				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
 				0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */,
 				0B23CE701FACC64B0094B9CB /* SISCar.xcdatamodeld in Sources */,
+				0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */,
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
