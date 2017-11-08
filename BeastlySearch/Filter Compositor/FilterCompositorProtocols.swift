@@ -23,9 +23,9 @@ protocol FilterBinding: class {
 
 protocol PopulationBinding: class {
     associatedtype T
-    var activeBindings: [(T) -> Void] { get }
-    func bind(_ binding: @escaping ((T) -> Void))
-    func removeBinding(atIndex index: Int) throws -> ((T) -> Void)
+    var activeBindings: [([T]) -> Void] { get }
+    func bind(_ binding: @escaping (([T]) -> Void))
+    func removeBinding(atIndex index: Int) throws -> (([T]) -> Void)
     func removeAllBindings()
 }
 

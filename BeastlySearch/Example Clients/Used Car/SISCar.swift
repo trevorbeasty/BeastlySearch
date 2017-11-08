@@ -59,7 +59,7 @@ extension SISCar {
 
 extension SISCar: CustomStringConvertible {
     public var description: String {
-        return "\(id) - \(year) \(make) \(model), mileage: \(mileage) miles"
+        return "\(id) - \(year) \(make) \(model), mileage: \(mileage) miles, price: \(price)"
     }
 }
 

@@ -35,7 +35,6 @@
 		0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */; };
 		0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */; };
 		0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */; };
-		0B23CED11FB33CCA0094B9CB /* GroupProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CED01FB33CCA0094B9CB /* GroupProtocols.swift */; };
 		0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */; };
 		0B23CED51FB33EE00094B9CB /* CoreDataQualBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */; };
 		0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */; };
@@ -98,7 +97,6 @@
 		0B23CEC61FADE1960094B9CB /* QuantHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantHeaderView.swift; sourceTree = "<group>"; };
 		0B23CEC81FADE1A40094B9CB /* QualHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualHeaderView.swift; sourceTree = "<group>"; };
 		0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorHeaderView.swift; sourceTree = "<group>"; };
-		0B23CED01FB33CCA0094B9CB /* GroupProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupProtocols.swift; sourceTree = "<group>"; };
 		0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataQuantBuilder.swift; sourceTree = "<group>"; };
 		0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataQualBuilder.swift; sourceTree = "<group>"; };
 		0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -190,7 +188,6 @@
 			children = (
 				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
 				0B23CEB51FACE0DF0094B9CB /* FilterCompositorErrors.swift */,
-				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B23CE9B1FACC7BC0094B9CB /* Builders */,
 			);
 			path = "Filter Compositor";
@@ -272,7 +269,6 @@
 		0B23CECC1FB339500094B9CB /* Abstract */ = {
 			isa = PBXGroup;
 			children = (
-				0B23CED01FB33CCA0094B9CB /* GroupProtocols.swift */,
 				0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */,
 				0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */,
 			);
@@ -282,6 +278,7 @@
 		0B23CECD1FB3395D0094B9CB /* General */ = {
 			isa = PBXGroup;
 			children = (
+				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */,
 				0B23CEA21FACC8230094B9CB /* QuantGroup.swift */,
 				0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */,
@@ -452,7 +449,6 @@
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
-				0B23CED11FB33CCA0094B9CB /* GroupProtocols.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
 				0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */,
 				0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */,

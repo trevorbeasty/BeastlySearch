@@ -9,17 +9,16 @@
 import Foundation
 import CoreData
 
-class CoreDataQualBuilder<T>: QualSelectable where T: NSManagedObject {
-    let context: NSManagedObjectContext
-    let entityName: String
+class CoreDataQualBuilder<T>: Filtering, QualSelectable where T: NSManagedObject {
+    weak var compositor: CoreDataFilterCompositor<T>? {
+        willSet { if compositor != nil { fatalError() } }
+    }
     let attributeName: String
     let name: String
     let textSearchPredicate: TextSearchPredicate
     let includeInGeneralSearch: Bool
     
-    init(context: NSManagedObjectContext, entityName: String, attributeName: String, name: String, textSearchPredicate: @escaping TextSearchPredicate = CoreDataQualBuilder.defaultTextSeachPredicate, includeInGeneralSearch: Bool = false) {
-        self.context = context
-        self.entityName = entityName
+    init(attributeName: String, name: String, textSearchPredicate: @escaping TextSearchPredicate = CoreDataQualBuilder.defaultTextSeachPredicate, includeInGeneralSearch: Bool = false){
         self.attributeName = attributeName
         self.name = name
         self.textSearchPredicate = textSearchPredicate
@@ -42,13 +41,49 @@ class CoreDataQualBuilder<T>: QualSelectable where T: NSManagedObject {
     }
     
     private var population: [T] {
-        let request: NSFetchRequest<T> = NSFetchRequest<T>(entityName: entityName)
-        return try! context.fetch(request)
+        guard let compositor = compositor else { fatalError() }
+        return compositor.population
     }
     
+    // MARK: - Filtering
+    var filter: (T) -> Bool {
+        return { (instance) -> Bool in
+            return self.selectableFilter(instance) && self.searchableFilter(instance)
+        }
+    }
+    
+    private var selectableFilter: (T) -> Bool {
+        // should self be captured weakly?
+        return { instance -> Bool in
+            let value = self.valueForInstance(instance)
+            if self.selectedValues.count == 0 { return true }
+            return self.selectedValues.contains(value)
+        }
+    }
+    
+    private var searchableFilter: (T) -> Bool {
+        return { (instance) -> Bool in
+            guard let searchText = self.searchText, searchText != "" else {
+                return true
+            }
+            let value = self.valueForInstance(instance)
+            return self.textSearchPredicate(value, searchText)
+        }
+    }
+    
+    func valueForInstance(_ instance: T) -> String {
+        guard let value = instance.value(forKey: self.attributeName) as? String else { fatalError() }
+        return value
+    }
+
+    
     // MARK: - QualSelectable
-    private(set) var selectedValues = Set<String>()
-    private(set) var searchText: String?
+    private(set) var selectedValues = Set<String>() {
+        didSet { compositor?.didUpdate(self) }
+    }
+    private(set) var searchText: String? {
+        didSet { compositor?.didUpdate(self) }
+    }
     
     func selectValue(_ value: String) throws {
         guard values.contains(value) else { throw QualSelectorError.invalidValue(value) }

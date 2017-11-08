@@ -30,3 +30,9 @@ public class Car: NSManagedObject {
     }
     
 }
+
+extension Car {
+    public override var description: String {
+        return "\(id) - \(year) \(make) \(model), mileage: \(mileage) miles, price: \(price)"
+    }
+}

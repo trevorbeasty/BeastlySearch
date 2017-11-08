@@ -18,11 +18,28 @@ class CoreDataClient {
             catch { print(error) }
         }
         
-        let price = CoreDataQuantBuilder(context: coreDataManager.context, entityName: "Car", attributeName: "price", name: "Price")
-        price.summarize()
+        let price = CoreDataQuantBuilder(attributeName: "price", name: "Price")
+        let brand = CoreDataQualBuilder(attributeName: "make", name: "Brand")
+        let compositor = CoreDataFilterCompositor.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand])
         
-        let brand = CoreDataQualBuilder(context: coreDataManager.context, entityName: "Car", attributeName: "make", name: "Brand")
+        price.summarize()
         brand.summarize()
+        
+        // bind
+        compositor.bind { (filteredPopulation) in
+            print("\n\n\n")
+            filteredPopulation.forEach({ print($0) })
+        }
+        
+        // select
+        price.selectMax(10000)
+        do {
+            try brand.selectValue("Ford")
+            try brand.selectValue("Honda")
+        }
+        catch {
+            print(error)
+        }
     }
     
 }
