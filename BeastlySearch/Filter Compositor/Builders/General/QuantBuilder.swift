@@ -81,3 +81,9 @@ class QuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive {
         selectedMax = value
     }
 }
+
+
+
+
+
+

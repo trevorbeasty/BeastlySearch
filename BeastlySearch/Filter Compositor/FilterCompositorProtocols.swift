@@ -21,6 +21,14 @@ protocol FilterBinding: class {
     func removeAllBindings()
 }
 
+protocol PopulationBinding: class {
+    associatedtype T
+    var activeBindings: [([T]) -> Void] { get }
+    func bind(_ binding: @escaping (([T]) -> Void))
+    func removeBinding(atIndex index: Int) throws -> (([T]) -> Void)
+    func removeAllBindings()
+}
+
 protocol FilterSelection: class {
     var quantSelectors: [QuantSelectable] { get }
     var qualSelectors: [QualSelectable] { get }
