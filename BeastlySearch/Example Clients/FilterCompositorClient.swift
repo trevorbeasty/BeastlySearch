@@ -21,7 +21,7 @@ class FilterCompositorClient {
     
     static var usedCarExample: VoidClosure {
         return {
-            return exampleWith(title: "Title", description: "description") {
+            exampleWith(title: "Title", description: "description") {
                 // population
                 let cars = SISCar.allUsedCars()
                 SISCar.printCars(cars, title: "All cars")
@@ -30,12 +30,18 @@ class FilterCompositorClient {
                 let mileage = QuantBuilder(keyPath: \SISCar.mileage, name: "Mileage", population: cars)
                 let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: false)
                 let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
-                let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model])
+                let priceSort = SortBuilder<SISCar>(name: "Cheapest", sorter: { (car0, car1) -> Bool in
+                    return car0.price < car1.price
+                })
+                let brandSort = SortBuilder<SISCar>(name: "Brand", sorter: { (car0, car1) -> Bool in
+                    return car0.make < car1.make
+                })
+                let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [priceSort, brandSort])
                 
                 // binding
-                filterCompositor.bind({ (carFilter) in
-                    let filteredCars = cars.filter(carFilter)
-                    SISCar.printCars(filteredCars, title: "Filtered cars")
+                filterCompositor.bind({ (filterSort) in
+                    let compositedCars = filterSort.resultForPopulation(cars)
+                    SISCar.printCars(compositedCars, title: "Filtered cars")
                 })
                 
                 // filter selection
@@ -48,6 +54,9 @@ class FilterCompositorClient {
                 catch {
                     print(error)
                 }
+                
+                priceSort.select()
+                brandSort.select()
 
             }
         }

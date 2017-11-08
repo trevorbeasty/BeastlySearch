@@ -47,7 +47,7 @@ class FilterSelectorSceneClient {
         let price = QuantBuilder(keyPath: \SISCar.price, name: "Price", population: cars, converter: priceConverter, increment: 100)
         let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: true)
         let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
-        let filterCompositor = FilterCompositor.compositorFor(quant: [price, mileage], qual: [brand, model])
+        let filterCompositor = FilterCompositor.compositorFor(quant: [price, mileage], qual: [brand, model], sort: [])
         let selectors: [FilterSelectorType] = [
             FilterSelectorType.quant(price),
             FilterSelectorType.quant(mileage),
@@ -58,9 +58,9 @@ class FilterSelectorSceneClient {
         
         // prints all cars initially, and filtered cars every time the filter updates
         SISCar.printCars(cars, title: "All cars")
-        filterCompositor.bind { (carFilter) in
-            let filteredCars = cars.filter(carFilter)
-            SISCar.printCars(filteredCars, title: "Filtered cars")
+        filterCompositor.bind { (filterSort) in
+            let compositedCars = filterSort.resultForPopulation(cars)
+            SISCar.printCars(compositedCars, title: "Filtered cars")
         }
         
         carsFilterCompositor = filterCompositor
