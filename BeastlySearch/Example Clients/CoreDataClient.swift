@@ -20,6 +20,9 @@ class CoreDataClient {
         
         let price = CoreDataQuantBuilder(context: coreDataManager.context, entityName: "Car", attributeName: "price", name: "Price")
         price.summarize()
+        
+        let brand = CoreDataQualBuilder(context: coreDataManager.context, entityName: "Car", attributeName: "make", name: "Brand")
+        brand.summarize()
     }
     
 }

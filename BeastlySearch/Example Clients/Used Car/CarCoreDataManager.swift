@@ -16,7 +16,6 @@ enum CarCoreDataManagerError: Error {
 protocol CarCoreDataManagerProtocol {
     var context: NSManagedObjectContext { get }
     func saveCar(_ car: SISCar) throws
-    func allCars() throws -> [Car]
 }
 
 class CarCoreDataManager: CarCoreDataManagerProtocol {
@@ -42,12 +41,6 @@ class CarCoreDataManager: CarCoreDataManagerProtocol {
         let managedCar: Car = (results.first ?? NSEntityDescription.insertNewObject(forEntityName: "Car", into: context)) as! Car
         managedCar.configureFromCar(car)
         try context.save()
-    }
-    
-    func allCars() throws -> [Car] {
-        let request: NSFetchRequest<Car> = Car.fetchRequest()
-        let results = try context.fetch(request)
-        return results
     }
     
 }

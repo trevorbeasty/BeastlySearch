@@ -1,8 +1,8 @@
 //
-//  CoreDataFilterCompositor.swift
+//  CoreDataQuantBuilder.swift
 //  BeastlySearch
 //
-//  Created by Trevor Beasty on 11/7/17.
+//  Created by Trevor Beasty on 11/8/17.
 //  Copyright © 2017 Trevor Beasty. All rights reserved.
 //
 
@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 class CoreDataQuantBuilder<T>: QuantSelectable where T: NSManagedObject {
+    // one context should be shared by all builders and held in the filter compositor
     let context: NSManagedObjectContext
     let entityName: String
     let attributeName: String
@@ -28,7 +29,7 @@ class CoreDataQuantBuilder<T>: QuantSelectable where T: NSManagedObject {
     var min: Int {
         var value = Int.max
         population.forEach({ instance in
-            guard let currentValue = instance.value(forKey: attributeName) as? Int else { return }
+            guard let currentValue = instance.value(forKey: attributeName) as? Int else { fatalError() }
             if currentValue < value { value = currentValue }
         })
         return value
@@ -37,7 +38,7 @@ class CoreDataQuantBuilder<T>: QuantSelectable where T: NSManagedObject {
     var max: Int {
         var value = Int.min
         population.forEach({ instance in
-            guard let currentValue = instance.value(forKey: attributeName) as? Int else { return }
+            guard let currentValue = instance.value(forKey: attributeName) as? Int else { fatalError() }
             if currentValue > value { value = currentValue }
         })
         return value
@@ -55,10 +56,4 @@ class CoreDataQuantBuilder<T>: QuantSelectable where T: NSManagedObject {
     func selectMax(_ value: Int) {
         self.selectedMax = value
     }
-}
-
-class CoreDataFilterCompositor {
-    
-    
-    
 }

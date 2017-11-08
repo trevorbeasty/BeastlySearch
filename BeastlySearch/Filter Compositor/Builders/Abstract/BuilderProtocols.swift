@@ -51,3 +51,9 @@ protocol QualSelectable {
     func setSearchText(_ text: String?)
 }
 
+extension QualSelectable {
+    func summarize() {
+        print("name: \(name), values: \(values)")
+    }
+}
+
