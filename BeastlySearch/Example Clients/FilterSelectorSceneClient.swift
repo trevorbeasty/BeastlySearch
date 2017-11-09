@@ -32,9 +32,9 @@ extension Int {
 class FilterSelectorSceneClient {
     
     // must be persisted, otherwise will deallocate following setup and bindings will not be called
-    static var carsFilterCompositor: FilterCompositor<SISCar>?
+    private static var carsFilterCompositor: FilterCompositor<SISCar>?
     
-    static var usedCarsFilterSelectorScene: FilterSelectorViewController {
+    static func usedCarsFilterSelectorScene() -> FilterSelectorViewController {
         let cars = SISCar.allUsedCars()
         let mileageConverter: IntConverter = { value -> String in
             let miles = value == 1 ? "mile" : "miles"

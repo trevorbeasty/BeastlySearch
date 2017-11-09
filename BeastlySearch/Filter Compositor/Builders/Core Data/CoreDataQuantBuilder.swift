@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataQuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive where T: NSManagedObject {
+class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressive where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
     }
@@ -32,19 +32,19 @@ class CoreDataQuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive where
         didSet { compositor?.didUpdate(self) }
     }
     
-    // MARK: - Filtering
-    var filter: (T) -> Bool {
-        return { instance -> Bool in
-            guard let value = instance.value(forKey: self.attributeName) as? Int else { fatalError() }
-            var match = true
-            if let max = self.selectedMax {
-                match = match && value < max
-            }
-            if let min = self.selectedMin {
-                match = match && value > min
-            }
-            return match
+    // MARK: - CoreDataFiltering
+    var filter: NSPredicate? {
+        var predicates = [NSPredicate]()
+        if let selectedMin = selectedMin {
+            let minPredicate = NSPredicate(format: "%K > %d", argumentArray: [attributeName, selectedMin])
+            predicates.append(minPredicate)
         }
+        if let selectedMax = selectedMax {
+            let maxPredicate = NSPredicate(format: "%K < %d", argumentArray: [attributeName, selectedMax])
+            predicates.append(maxPredicate)
+        }
+        guard predicates.count > 0 else { return nil }
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     }
     
     // MARK: - QuantSelectable
@@ -66,7 +66,7 @@ class CoreDataQuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive where
         return value
     }
     
-    func valueForInstance(_ instance: T) -> Int {
+    private func valueForInstance(_ instance: T) -> Int {
         guard let value = instance.value(forKey: self.attributeName) as? Int else { fatalError() }
         return value
     }

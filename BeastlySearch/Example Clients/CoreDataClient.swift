@@ -6,11 +6,11 @@
 //  Copyright © 2017 Trevor Beasty. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class CoreDataClient {
     
-    static func carExample() {
+    static func carExample() -> UIViewController {
         let coreDataManager: CarCoreDataManager = CarCoreDataManager()
         let cars = SISCar.allUsedCars()
         cars.forEach { (car) in
@@ -19,8 +19,9 @@ class CoreDataClient {
         }
         
         let price = CoreDataQuantBuilder(attributeName: "price", name: "Price")
-        let brand = CoreDataQualBuilder(attributeName: "make", name: "Brand")
-        let compositor = CoreDataFilterCompositor.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand])
+        let brand = CoreDataQualBuilder(attributeName: "make", name: "Brand", includeInGeneralSearch: true)
+        let model = CoreDataQualBuilder(attributeName: "model", name: "Model", includeInGeneralSearch: true)
+        let compositor = CoreDataFilterCompositor.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model])
         
         price.summarize()
         brand.summarize()
@@ -40,6 +41,10 @@ class CoreDataClient {
         catch {
             print(error)
         }
+        
+        compositor.setGeneralSearchText("n")
+        
+        return UIViewController()
     }
     
 }

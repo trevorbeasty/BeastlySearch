@@ -32,16 +32,11 @@ extension QuantSelectable {
 }
 
 // MARK: - Qual
-// (baseString, searchText) -> Bool
-typealias TextSearchPredicate = (String, String) -> Bool
-
 protocol QualSelectable {
     var name: String { get }
     var values: Set<String> { get }
     var selectedValues: Set<String> { get }
     var searchText: String? { get }
-    var textSearchPredicate: TextSearchPredicate { get }
-    var includeInGeneralSearch: Bool { get }
     func selectValue(_ value: String) throws
     func deselectValue(_ value: String) throws
     func deselectAll()

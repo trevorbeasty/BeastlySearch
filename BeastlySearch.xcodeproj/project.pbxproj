@@ -42,6 +42,10 @@
 		0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725781FB2411C00526083 /* CarCoreDataManager.swift */; };
 		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
 		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
+		0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */; };
+		0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */; };
+		0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */; };
+		0B7BD8501FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84F1FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift */; };
 		0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639421FB39F2C000AD521 /* SortBuilder.swift */; };
 		0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */; };
 		0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639481FB3B75D000AD521 /* SortHeaderView.swift */; };
@@ -108,6 +112,10 @@
 		0B6725781FB2411C00526083 /* CarCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCoreDataManager.swift; sourceTree = "<group>"; };
 		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
+		0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFiltering.swift; sourceTree = "<group>"; };
+		0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSorting.swift; sourceTree = "<group>"; };
+		0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTextSearchable.swift; sourceTree = "<group>"; };
+		0B7BD84F1FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGeneralTextSearchable.swift; sourceTree = "<group>"; };
 		0BA639421FB39F2C000AD521 /* SortBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBuilder.swift; sourceTree = "<group>"; };
 		0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorVCSections.swift; sourceTree = "<group>"; };
 		0BA639481FB3B75D000AD521 /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
@@ -194,11 +202,9 @@
 		0B23CE981FACC7070094B9CB /* Filter Compositor */ = {
 			isa = PBXGroup;
 			children = (
-				0BA6394A1FB47F20000AD521 /* Filtering.swift */,
-				0BA6394C1FB484B4000AD521 /* Sorting.swift */,
-				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
+				0B7BD8511FB49BE300CDE0C4 /* Supporting */,
 				0B23CE9B1FACC7BC0094B9CB /* Builders */,
 			);
 			path = "Filter Compositor";
@@ -310,6 +316,20 @@
 				0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		0B7BD8511FB49BE300CDE0C4 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				0BA6394A1FB47F20000AD521 /* Filtering.swift */,
+				0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */,
+				0BA6394C1FB484B4000AD521 /* Sorting.swift */,
+				0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */,
+				0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */,
+				0B7BD84F1FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift */,
+				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +481,7 @@
 				0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */,
 				0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */,
 				0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */,
+				0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
 				0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */,
 				0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */,
@@ -470,11 +491,14 @@
 				0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */,
 				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
 				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
+				0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */,
 				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
 				0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */,
+				0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */,
 				0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
+				0B7BD8501FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift in Sources */,
 				0BA6394D1FB484B4000AD521 /* Sorting.swift in Sources */,
 				0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */,
 				0B23CED51FB33EE00094B9CB /* CoreDataQualBuilder.swift in Sources */,
