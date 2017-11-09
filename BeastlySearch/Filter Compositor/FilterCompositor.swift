@@ -8,31 +8,29 @@
 
 import Foundation
 
-class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, CompositorBinding {
+class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
     private let sortBuilders: [SortBuilder<T>]
     private let defaultSortBuilder: SortBuilder<T>
+    let filterSort = Value<FilterSort<(T)>>()
     
     func didUpdate(_ builder: QuantBuilder<T>) {
-        executeBindings()
+        updateFilterSort()
     }
     
     func didUpdate(_ builder: QualBuilder<T>) {
-        executeBindings()
+        updateFilterSort()
     }
     
     func didSelectSortBuilder(_ builder: SortBuilder<T>) {
         sorter = builder.sorter
-        executeBindings()
+        updateFilterSort()
     }
     
-    private func executeBindings() {
-        let filterSort = FilterSort(filter: filter, sort: sorter)
-        activeBindings.forEach { (binding) in
-            binding(filterSort)
-        }
+    private func updateFilterSort() {
+        self.filterSort.value = FilterSort(filter: filter, sort: sorter)
     }
     
     // MARK: - Construction
@@ -60,7 +58,7 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, C
         return qualBuilders as [QualSelectable]
     }
     var generalSearchText: String? {
-        didSet { executeBindings() }
+        didSet { updateFilterSort() }
     }
     
     func setGeneralSearchText(_ text: String?) {
@@ -78,7 +76,6 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, C
     }
     
     private var builderFilter: (T) -> Bool {
-        // capture self weakly?
         return { instance -> Bool in
             if self.quantBuilders.count == 0 && self.qualBuilders.count == 0 { return true }
             var match = true
@@ -106,23 +103,8 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, C
         }
     }
     
-    // MARK: - Sort Output
+    // MARK: - Sorting
     private(set) var sorter: ((T), (T)) -> Bool
-    
-    // MARK: - CompositorBinding
-    private(set) var activeBindings: [(FilterSort<(T)>) -> Void] = []
-    
-    func bind(_ binding: @escaping ((FilterSort<(T)>) -> Void)) {
-        activeBindings.append(binding)
-    }
-    
-    func removeBinding(atIndex index: Int) throws -> (FilterSort<(T)>) -> Void {
-        return activeBindings.remove(at: index)
-    }
-    
-    func removeAllBindings() {
-        activeBindings.removeAll()
-    }
     
 }
 

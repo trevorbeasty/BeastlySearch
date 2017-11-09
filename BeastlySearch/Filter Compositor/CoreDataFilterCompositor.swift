@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 
-class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection, PopulationBinding where T: NSManagedObject {
+class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection where T: NSManagedObject {
     let context: NSManagedObjectContext
     let entityName: String
     let quantBuilders: [CoreDataQuantBuilder<T>]
     let qualBuilders: [CoreDataQualBuilder<T>]
+    let compositedPopulation = Value<[T]>()
     
     private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>]) {
         self.context = context
@@ -49,42 +50,25 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection, Populatio
     var quantSelectors: [QuantSelectable] { return quantBuilders as [QuantSelectable] }
     var qualSelectors: [QualSelectable] { return qualBuilders as [QualSelectable] }
     private(set) var generalSearchText: String? {
-        didSet { executeBindings() }
+        didSet { updateCompositedPopulation() }
     }
     
     func setGeneralSearchText(_ text: String?) {
         generalSearchText = text
     }
-    
-    // MARK: - Population Binding
-    var activeBindings: [([T]) -> Void] = []
-    
-    func bind(_ binding: @escaping ((([T])) -> Void)) {
-        activeBindings.append(binding)
-    }
-    
-    func removeBinding(atIndex index: Int) throws -> ((([T])) -> Void) {
-        return activeBindings.remove(at: index)
-    }
-    
-    func removeAllBindings() {
-        activeBindings.removeAll()
-    }
-    
+
     func didUpdate(_ builder: CoreDataQuantBuilder<T>) {
-        executeBindings()
+        updateCompositedPopulation()
     }
-    
+
     func didUpdate(_ builder: CoreDataQualBuilder<T>) {
-        executeBindings()
+        updateCompositedPopulation()
     }
-    
-    private func executeBindings() {
+
+    private func updateCompositedPopulation() {
         let bindingRequest = request(forPredicate: filter)
         let filteredPopulation: [T] = try! context.fetch(bindingRequest)
-        activeBindings.forEach { (binding) in
-            binding(filteredPopulation)
-        }
+        compositedPopulation.value = filteredPopulation
     }
     
     // MARK: - CoreDataFiltering

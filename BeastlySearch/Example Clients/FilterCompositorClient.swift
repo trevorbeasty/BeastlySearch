@@ -8,19 +8,11 @@
 
 import UIKit
 
-typealias VoidClosure = () -> Void
-
-func exampleWith(title: String, description: String, example: VoidClosure) {
-    let dash = String(repeating: "-", count: 10)
-    print("\n\n\(dash)\nExample of: \(title)\nDescription: \(description)\n\(dash)")
-    example()
-    print("\n\(dash)\nEnd of example: \(title)\n\(dash)")
-}
-
 class FilterCompositorClient {
     
     static func usedCarExample() -> UIViewController {
-        exampleWith(title: "Title", description: "description") {
+
+        return ClientUtilites.exampleWith(title: "Non-interactive FilterCompositor", description: "Example construction and client interaction") {
             // population
             let cars = SISCar.allUsedCars()
             SISCar.printCars(cars, title: "All cars")
@@ -41,9 +33,10 @@ class FilterCompositorClient {
             let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [cheapest, brandSort], defaultSort: mostExpensive)
             
             // binding
-            filterCompositor.bind({ (filterSort) in
+            filterCompositor.filterSort.bind({ (filterSort) in
+                guard let filterSort = filterSort else { return }
                 let compositedCars = filterSort.resultForPopulation(cars)
-                SISCar.printCars(compositedCars, title: "Filtered cars")
+                SISCar.printCars(compositedCars, title: "Composited cars")
             })
             
             // filter selection
@@ -60,9 +53,9 @@ class FilterCompositorClient {
             cheapest.select()
             brandSort.select()
             
+            return UIViewController()
         }
         
-        return UIViewController()
     }
     
 }

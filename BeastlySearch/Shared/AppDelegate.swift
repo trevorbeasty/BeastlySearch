@@ -24,6 +24,15 @@ fileprivate enum Client {
             return CoreDataClient.carExample()
         }
     }
+    
+    static var nonInteractive: [Client] { return [.filterCompositor, .coreDataFilterCompositor] }
+    static var interactive: [Client] { return [.filterSelectorScene] }
+    
+    static func runNonInteractive() {
+        nonInteractive.forEach { (client) in
+            let _ = client.viewController
+        }
+    }
 }
 
 @UIApplicationMain
@@ -31,10 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    private let client: Client = .filterCompositor
+    private let client: Client = .coreDataFilterCompositor
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window?.rootViewController = client.viewController
+        Client.runNonInteractive()
+        window?.rootViewController = Client.filterSelectorScene.viewController
         window?.makeKeyAndVisible()
         
         return true

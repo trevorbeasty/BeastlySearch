@@ -36,3 +36,10 @@ extension Car {
         return "\(id) - \(year) \(make) \(model), mileage: \(mileage) miles, price: \(price)"
     }
 }
+
+extension Car {
+    static func printCars(_ cars: [Car], title: String) {
+        print("\n" + title + "\n")
+        cars.forEach({ print($0) })
+    }
+}

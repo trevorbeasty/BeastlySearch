@@ -15,7 +15,6 @@
 		0B23CE801FACC64C0094B9CB /* BeastlySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE7F1FACC64C0094B9CB /* BeastlySearchTests.swift */; };
 		0B23CE8B1FACC64C0094B9CB /* BeastlySearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */; };
 		0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */; };
-		0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */; };
 		0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */; };
 		0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA21FACC8230094B9CB /* QuantGroup.swift */; };
 		0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */; };
@@ -36,6 +35,11 @@
 		0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */; };
 		0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */; };
 		0B23CED51FB33EE00094B9CB /* CoreDataQualBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */; };
+		0B63414A1FB4A03500093465 /* Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341491FB4A03500093465 /* Bind.swift */; };
+		0B63414C1FB4AA8F00093465 /* FilterSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63414B1FB4AA8F00093465 /* FilterSort.swift */; };
+		0B63414E1FB4AAF700093465 /* FilterSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63414D1FB4AAF700093465 /* FilterSelection.swift */; };
+		0B6341501FB4AB0600093465 /* SortSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63414F1FB4AB0600093465 /* SortSelection.swift */; };
+		0B6341521FB4AC3500093465 /* ClientUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341511FB4AC3500093465 /* ClientUtilities.swift */; };
 		0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */; };
 		0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */; };
 		0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725731FB23F7E00526083 /* CoreDataClient.swift */; };
@@ -85,7 +89,6 @@
 		0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeastlySearchUITests.swift; sourceTree = "<group>"; };
 		0B23CE8C1FACC64C0094B9CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocols.swift; sourceTree = "<group>"; };
-		0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCompositorProtocols.swift; sourceTree = "<group>"; };
 		0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantBuilder.swift; sourceTree = "<group>"; };
 		0B23CEA21FACC8230094B9CB /* QuantGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantGroup.swift; sourceTree = "<group>"; };
 		0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualBuilder.swift; sourceTree = "<group>"; };
@@ -106,6 +109,11 @@
 		0B23CECA1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorHeaderView.swift; sourceTree = "<group>"; };
 		0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataQuantBuilder.swift; sourceTree = "<group>"; };
 		0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataQualBuilder.swift; sourceTree = "<group>"; };
+		0B6341491FB4A03500093465 /* Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bind.swift; sourceTree = "<group>"; };
+		0B63414B1FB4AA8F00093465 /* FilterSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSort.swift; sourceTree = "<group>"; };
+		0B63414D1FB4AAF700093465 /* FilterSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelection.swift; sourceTree = "<group>"; };
+		0B63414F1FB4AB0600093465 /* SortSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSelection.swift; sourceTree = "<group>"; };
+		0B6341511FB4AC3500093465 /* ClientUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientUtilities.swift; sourceTree = "<group>"; };
 		0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0B6725731FB23F7E00526083 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
@@ -239,6 +247,7 @@
 		0B23CEAC1FACC9640094B9CB /* Example Clients */ = {
 			isa = PBXGroup;
 			children = (
+				0B6341511FB4AC3500093465 /* ClientUtilities.swift */,
 				0B23CEAD1FACC98D0094B9CB /* FilterCompositorClient.swift */,
 				0B23CEC41FAD2E330094B9CB /* FilterSelectorSceneClient.swift */,
 				0B6725731FB23F7E00526083 /* CoreDataClient.swift */,
@@ -322,12 +331,15 @@
 			isa = PBXGroup;
 			children = (
 				0BA6394A1FB47F20000AD521 /* Filtering.swift */,
+				0B63414B1FB4AA8F00093465 /* FilterSort.swift */,
 				0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */,
 				0BA6394C1FB484B4000AD521 /* Sorting.swift */,
 				0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */,
 				0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */,
 				0B7BD84F1FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift */,
-				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
+				0B63414D1FB4AAF700093465 /* FilterSelection.swift */,
+				0B63414F1FB4AB0600093465 /* SortSelection.swift */,
+				0B6341491FB4A03500093465 /* Bind.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -469,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */,
+				0B6341521FB4AC3500093465 /* ClientUtilities.swift in Sources */,
 				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
 				0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */,
 				0B23CE701FACC64B0094B9CB /* SISCar.xcdatamodeld in Sources */,
@@ -476,6 +489,7 @@
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
+				0B63414C1FB4AA8F00093465 /* FilterSort.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,
 				0B23CECB1FADE6BB0094B9CB /* FilterSelectorHeaderView.swift in Sources */,
 				0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */,
@@ -489,11 +503,13 @@
 				0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */,
 				0B23CEC71FADE1960094B9CB /* QuantHeaderView.swift in Sources */,
 				0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */,
-				0B23CE9F1FACC7E90094B9CB /* FilterCompositorProtocols.swift in Sources */,
+				0B6341501FB4AB0600093465 /* SortSelection.swift in Sources */,
 				0B23CEAB1FACC9350094B9CB /* FilterCompositor.swift in Sources */,
 				0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */,
+				0B63414A1FB4A03500093465 /* Bind.swift in Sources */,
 				0B23CEA91FACC8F20094B9CB /* BuilderErrors.swift in Sources */,
 				0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */,
+				0B63414E1FB4AAF700093465 /* FilterSelection.swift in Sources */,
 				0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */,
 				0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
