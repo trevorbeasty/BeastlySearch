@@ -8,11 +8,12 @@
 
 import Foundation
 
-class FilterCompositor<T>: Filtering, SortOutput, FilterSelection, SortSelection, CompositorBinding {
+class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, CompositorBinding {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
     private let sortBuilders: [SortBuilder<T>]
+    private let defaultSortBuilder: SortBuilder<T>
     
     func didUpdate(_ builder: QuantBuilder<T>) {
         executeBindings()
@@ -35,14 +36,16 @@ class FilterCompositor<T>: Filtering, SortOutput, FilterSelection, SortSelection
     }
     
     // MARK: - Construction
-    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>]) {
+    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], defaultSort: SortBuilder<T>) {
         self.quantBuilders = quant
         self.qualBuilders = qual
         self.sortBuilders = sort
+        self.defaultSortBuilder = defaultSort
+        sorter = defaultSortBuilder.sorter
     }
     
-    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>]) -> FilterCompositor<T> {
-        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort)
+    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], defaultSort: SortBuilder<T>) -> FilterCompositor<T> {
+        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort, defaultSort: defaultSort)
         quant.forEach({ $0.delegate = compositor })
         qual.forEach({ $0.delegate = compositor })
         sort.forEach({ $0.compositor = compositor })
@@ -104,7 +107,7 @@ class FilterCompositor<T>: Filtering, SortOutput, FilterSelection, SortSelection
     }
     
     // MARK: - Sort Output
-    var sorter: (((T), (T)) -> Bool)?
+    private(set) var sorter: ((T), (T)) -> Bool
     
     // MARK: - CompositorBinding
     private(set) var activeBindings: [(FilterSort<(T)>) -> Void] = []

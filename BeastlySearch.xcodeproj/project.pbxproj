@@ -46,6 +46,7 @@
 		0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */; };
 		0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639481FB3B75D000AD521 /* SortHeaderView.swift */; };
 		0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA6394A1FB47F20000AD521 /* Filtering.swift */; };
+		0BA6394D1FB484B4000AD521 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA6394C1FB484B4000AD521 /* Sorting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorVCSections.swift; sourceTree = "<group>"; };
 		0BA639481FB3B75D000AD521 /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		0BA6394A1FB47F20000AD521 /* Filtering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtering.swift; sourceTree = "<group>"; };
+		0BA6394C1FB484B4000AD521 /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				0BA6394A1FB47F20000AD521 /* Filtering.swift */,
+				0BA6394C1FB484B4000AD521 /* Sorting.swift */,
 				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
@@ -472,6 +475,7 @@
 				0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */,
 				0B23CEA71FACC8380094B9CB /* QualGroup.swift in Sources */,
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
+				0BA6394D1FB484B4000AD521 /* Sorting.swift in Sources */,
 				0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */,
 				0B23CED51FB33EE00094B9CB /* CoreDataQualBuilder.swift in Sources */,
 				0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */,

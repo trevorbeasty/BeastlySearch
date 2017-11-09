@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol SortOutput {
-    associatedtype T
-    var sorter: ((T, T) -> Bool)? { get }
-}
-
+// MARK: - Binding
 struct FilterSort<T> {
     let filter: (T) -> Bool
     let sort: ((T, T) -> Bool)?
@@ -42,6 +38,7 @@ protocol PopulationBinding: class {
     func removeAllBindings()
 }
 
+// MARK: - Selection
 protocol FilterSelection: class {
     var quantSelectors: [QuantSelectable] { get }
     var qualSelectors: [QualSelectable] { get }

@@ -55,10 +55,6 @@ extension QualSelectable {
 }
 
 // MARK: - Sort
-protocol Sorting {
-    associatedtype T
-    var sorter: (T, T) -> Bool { get }
-}
 
 protocol SortSelectable {
     var name: String { get }

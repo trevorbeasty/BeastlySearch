@@ -47,15 +47,18 @@ class FilterSelectorSceneClient {
         let price = QuantBuilder(keyPath: \SISCar.price, name: "Price", population: cars, converter: priceConverter, increment: 100)
         let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: true)
         let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
-        let filterCompositor = FilterCompositor.compositorFor(quant: [price, mileage], qual: [brand, model], sort: [])
-        let priceSort = SortBuilder<SISCar>(name: "Cheapest", sorter: { (car0, car1) -> Bool in
+        let cheapest = SortBuilder<SISCar>(name: "Cheapest", sorter: { (car0, car1) -> Bool in
             return car0.price < car1.price
         })
         let brandSort = SortBuilder<SISCar>(name: "Brand", sorter: { (car0, car1) -> Bool in
             return car0.make < car1.make
         })
+        let mostExpensive = SortBuilder<SISCar>(name: "Most Expensive", sorter: { (car0, car1) -> Bool in
+            return car0.price > car1.price
+        })
+        let filterCompositor = FilterCompositor.compositorFor(quant: [price, mileage], qual: [brand, model], sort: [cheapest, brandSort], defaultSort: mostExpensive)
         let selectors: [SelectorType] = [
-            SelectorType.sort([priceSort, brandSort]),
+            SelectorType.sort([cheapest, brandSort]),
             SelectorType.quant(price),
             SelectorType.quant(mileage),
             SelectorType.qual(brand),

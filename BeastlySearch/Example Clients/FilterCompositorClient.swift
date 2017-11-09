@@ -30,13 +30,16 @@ class FilterCompositorClient {
                 let mileage = QuantBuilder(keyPath: \SISCar.mileage, name: "Mileage", population: cars)
                 let brand = QualBuilder(keyPath: \SISCar.make, name: "Brand", population: cars, includeInGeneralSearch: false)
                 let model = QualBuilder(keyPath: \SISCar.model, name: "Model", population: cars, includeInGeneralSearch: true)
-                let priceSort = SortBuilder<SISCar>(name: "Cheapest", sorter: { (car0, car1) -> Bool in
+                let cheapest = SortBuilder<SISCar>(name: "Cheapest", sorter: { (car0, car1) -> Bool in
                     return car0.price < car1.price
                 })
                 let brandSort = SortBuilder<SISCar>(name: "Brand", sorter: { (car0, car1) -> Bool in
                     return car0.make < car1.make
                 })
-                let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [priceSort, brandSort])
+                let mostExpensive = SortBuilder<SISCar>(name: "Most Expensive", sorter: { (car0, car1) -> Bool in
+                    return car0.price > car1.price
+                })
+                let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [cheapest, brandSort], defaultSort: mostExpensive)
                 
                 // binding
                 filterCompositor.bind({ (filterSort) in
@@ -55,7 +58,7 @@ class FilterCompositorClient {
                     print(error)
                 }
                 
-                priceSort.select()
+                cheapest.select()
                 brandSort.select()
 
             }
