@@ -8,68 +8,6 @@
 
 import UIKit
 
-protocol OpenClose {
-    var isOpen: Bool { get set }
-}
-
-extension OpenClose {
-    mutating func toggleIsOpen() {
-        isOpen = !isOpen
-    }
-}
-
-enum SectionType {
-    case quant(QuantSectionInfo)
-    case qual(QualSectionInfo)
-}
-
-struct QuantSectionInfo: OpenClose {
-    let name: String
-    let min: Int
-    let max: Int
-    let converter: IntConverter
-    let increment: Int
-    var isOpen: Bool
-    var selectedMin: Int?
-    var selectedMax: Int?
-    
-    init(name: String, min: Int, max: Int, converter: @escaping IntConverter, increment: Int, isOpen: Bool = true, selectedMin: Int? = nil, selectedMax: Int? = nil) {
-        self.name = name
-        self.min = min
-        self.max = max
-        self.converter = converter
-        self.increment = increment
-        self.isOpen = isOpen
-        self.selectedMin = selectedMin
-        self.selectedMax = selectedMax
-    }
-}
-
-extension QuantSectionInfo {
-    init(quant: QuantSelectable & QuantExpressive, isOpen: Bool = true, selectedMin: Int? = nil, selectedMax: Int? = nil) {
-        self.name = quant.name
-        self.min = quant.min
-        self.max = quant.max
-        self.converter = quant.converter
-        self.increment = quant.increment
-        self.isOpen = isOpen
-        self.selectedMin = selectedMin
-        self.selectedMax = selectedMax
-    }
-}
-
-struct QualSectionInfo: OpenClose {
-    let name: String
-    let values: [String]
-    var isOpen: Bool
-    
-    init(name: String, values: [String], isOpen: Bool = false) {
-        self.name = name
-        self.values = values
-        self.isOpen = isOpen
-    }
-}
-
 protocol FilterSelectorViewControllerOutput: class {
     func didSelectValue(_ value: String, forIndex index: Int)
     func didDeselectValue(_ value: String, forIndex index: Int)
@@ -80,6 +18,7 @@ fileprivate struct Constants {
     static let qualCellID = "QualFilterCell"
     static let quantHeaderID = "QuantHeaderView"
     static let qualHeaderID = "QualHeaderView"
+    static let sortHeaderID = "SortHeaderView"
 }
 
 class FilterSelectorViewController: UIViewController {
@@ -134,6 +73,7 @@ class FilterSelectorViewController: UIViewController {
         tableView.register(QualFilterCell.self, forCellReuseIdentifier: Constants.qualCellID)
         tableView.register(QuantHeaderView.self, forHeaderFooterViewReuseIdentifier: Constants.quantHeaderID)
         tableView.register(QualHeaderView.self, forHeaderFooterViewReuseIdentifier: Constants.qualHeaderID)
+        tableView.register(SortHeaderView.self, forHeaderFooterViewReuseIdentifier: Constants.sortHeaderID)
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
     }
@@ -151,6 +91,8 @@ extension FilterSelectorViewController: UITableViewDataSource {
             return quantInfo.isOpen ? 1 : 0
         case .qual(let qualInfo):
             return qualInfo.isOpen ? qualInfo.values.count : 0
+        case .sort(_):
+            return 0
         }
     }
     
@@ -167,6 +109,9 @@ extension FilterSelectorViewController: UITableViewDataSource {
             let selected = selectedPaths.contains(indexPath)
             cell.configure(value, selected: selected)
             return cell
+            
+        case .sort(_):
+            fatalError()
         }
     }
     
@@ -182,6 +127,11 @@ extension FilterSelectorViewController: UITableViewDataSource {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.qualHeaderID) as! QualHeaderView
             header.configure(index: section, delegate: self)
             header.configure(qualInfo: qualInfo)
+            return header
+            
+        case .sort(let sortInfo):
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.sortHeaderID) as! SortHeaderView
+            header.configure(info: sortInfo, delegate: self)
             return header
         }
     }
@@ -225,6 +175,12 @@ extension FilterSelectorViewController: FilterSelectorHeaderViewDelegate {
         default:
             break
         }
+    }
+}
+
+extension FilterSelectorViewController: SortHeaderViewDelegate {
+    func didSelectIndex(_ index: Int) {
+        print("sort header view did select index: \(index)")
     }
 }
 

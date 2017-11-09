@@ -1,5 +1,5 @@
 //
-//  FilterCompositorErrors.swift
+//  QualGroup.swift
 //  BeastlySearch
 //
 //  Created by Trevor Beasty on 11/3/17.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-enum FilterBindingError: Error {
-    case noBindingAtIndex(Int)
+struct QualGroup<T> {
+    let name: String
+    let values: Set<String>
 }
