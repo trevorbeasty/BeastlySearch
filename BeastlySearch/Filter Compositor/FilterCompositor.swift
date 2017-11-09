@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelection, CompositorBinding {
+class FilterCompositor<T>: Filtering, SortOutput, FilterSelection, SortSelection, CompositorBinding {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]

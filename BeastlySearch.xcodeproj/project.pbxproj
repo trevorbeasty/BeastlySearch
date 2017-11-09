@@ -45,6 +45,7 @@
 		0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639421FB39F2C000AD521 /* SortBuilder.swift */; };
 		0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */; };
 		0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA639481FB3B75D000AD521 /* SortHeaderView.swift */; };
+		0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA6394A1FB47F20000AD521 /* Filtering.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +110,7 @@
 		0BA639421FB39F2C000AD521 /* SortBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortBuilder.swift; sourceTree = "<group>"; };
 		0BA639461FB3B68D000AD521 /* FilterSelectorVCSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSelectorVCSections.swift; sourceTree = "<group>"; };
 		0BA639481FB3B75D000AD521 /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
+		0BA6394A1FB47F20000AD521 /* Filtering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtering.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 		0B23CE981FACC7070094B9CB /* Filter Compositor */ = {
 			isa = PBXGroup;
 			children = (
+				0BA6394A1FB47F20000AD521 /* Filtering.swift */,
 				0B23CE9E1FACC7E90094B9CB /* FilterCompositorProtocols.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
@@ -456,6 +459,7 @@
 				0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */,
 				0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
+				0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */,
 				0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */,
 				0B23CEC91FADE1A40094B9CB /* QualHeaderView.swift in Sources */,
 				0B23CEBD1FAD18F90094B9CB /* FilterSelectorPresenter.swift in Sources */,

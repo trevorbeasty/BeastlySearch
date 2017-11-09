@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol Filtering {
-    associatedtype T
-    var filter: (T) -> Bool { get }
-}
-
 // MARK: - Quant
 typealias IntConverter = (Int) -> String
 protocol QuantExpressive {

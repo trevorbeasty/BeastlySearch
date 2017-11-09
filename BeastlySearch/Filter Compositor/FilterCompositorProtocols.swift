@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol FilterOutput: class {
-    associatedtype T
-    var filter: (T) -> Bool { get }
-}
-
 protocol SortOutput {
     associatedtype T
     var sorter: ((T, T) -> Bool)? { get }
