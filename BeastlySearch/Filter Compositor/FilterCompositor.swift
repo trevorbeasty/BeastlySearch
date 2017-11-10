@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection {
+class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, MacroSelection {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
@@ -78,7 +78,10 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection {
     // MARK: - SortSelection
     var sortSelectors: [SortSelectable] { return sortBuilders as [SortSelectable] }
     
-    // MARK: - Filter Output
+    // MARK: - MacroSelection
+    var macroSelectors: [MacroSelectable] { return macroBuilders as [MacroSelectable] }
+    
+    // MARK: - Filtering
     var filter: (T) -> Bool {
         return { (instance) -> Bool in
             return self.builderFilter(instance) && self.generalSearchTextFilter(instance)
