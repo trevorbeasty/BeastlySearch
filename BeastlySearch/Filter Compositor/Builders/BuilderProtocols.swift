@@ -50,9 +50,15 @@ extension QualSelectable {
 }
 
 // MARK: - Sort
-
 protocol SortSelectable {
     var name: String { get }
+    func select()
+}
+
+// MARK: - Macro
+protocol MacroSelectable {
+    var name: String { get }
+    var detail: String? { get }
     func select()
 }
 

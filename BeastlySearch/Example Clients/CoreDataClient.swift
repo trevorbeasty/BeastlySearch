@@ -24,7 +24,12 @@ class CoreDataClient {
             let price = CoreDataQuantBuilder<Car>(attributeName: "price", name: "Price")
             let brand = CoreDataQualBuilder<Car>(attributeName: "make", name: "Brand", includeInGeneralSearch: true)
             let model = CoreDataQualBuilder<Car>(attributeName: "model", name: "Model", includeInGeneralSearch: true)
-            let compositor = CoreDataFilterCompositor<Car>.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model])
+            let mostExpensiveSorter = CoreDataSorter(attributeName: "price", ascending: false)
+            let mostExpensive = CoreDataSortBuilder<Car>(name: "Most Expensive", sorters: [mostExpensiveSorter])
+            let newestSorter = CoreDataSorter(attributeName: "year", ascending: false)
+            let cheapestSorter = CoreDataSorter(attributeName: "price", ascending: true)
+            let newest = CoreDataSortBuilder<Car>(name: "Newest", sorters: [newestSorter, cheapestSorter])
+            let compositor = CoreDataFilterCompositor<Car>.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model], sortBuilders: [newest], defaultSortBuilder: mostExpensive)
             
             // print
             price.summarize()
@@ -49,6 +54,7 @@ class CoreDataClient {
             }
             
             compositor.setGeneralSearchText("n")
+            newest.select()
             
             return UIViewController()
         }
