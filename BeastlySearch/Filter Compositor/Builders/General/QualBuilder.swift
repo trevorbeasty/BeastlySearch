@@ -8,7 +8,7 @@
 
 import Foundation
 
-class QualBuilder<T>: Filtering, QualSelectable {
+class QualBuilder<T>: Filtering, QualSelectable, GeneralTextSearchable {
     weak var delegate: FilterCompositor<T>?
     let keyPath: KeyPath<T,String>
     let group: QualGroup<T>

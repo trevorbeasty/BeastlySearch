@@ -9,26 +9,18 @@
 import Foundation
 import CoreData
 
-class CoreDataQualBuilder<T>: Filtering, QualSelectable where T: NSManagedObject {
+class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneralTextSearchable where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
     }
     let attributeName: String
     let name: String
-    let textSearchPredicate: TextSearchPredicate
     let includeInGeneralSearch: Bool
     
-    init(attributeName: String, name: String, textSearchPredicate: @escaping TextSearchPredicate = CoreDataQualBuilder.defaultTextSeachPredicate, includeInGeneralSearch: Bool = false){
+    init(attributeName: String, name: String, includeInGeneralSearch: Bool = false){
         self.attributeName = attributeName
         self.name = name
-        self.textSearchPredicate = textSearchPredicate
         self.includeInGeneralSearch = includeInGeneralSearch
-    }
-    
-    static var defaultTextSeachPredicate: TextSearchPredicate {
-        return { baseString, searchText in
-            return baseString.contains(searchText)
-        }
     }
     
     var values: Set<String> {
@@ -45,30 +37,24 @@ class CoreDataQualBuilder<T>: Filtering, QualSelectable where T: NSManagedObject
         return compositor.population
     }
     
-    // MARK: - Filtering
-    var filter: (T) -> Bool {
-        return { (instance) -> Bool in
-            return self.selectableFilter(instance) && self.searchableFilter(instance)
-        }
+    // MARK: - CoreDataFiltering
+    var filter: NSPredicate? {
+        let predicates = [selectableFilter, searchableFilter].flatMap { $0 }
+        guard predicates.count > 0 else { return nil }
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     }
     
-    private var selectableFilter: (T) -> Bool {
-        // should self be captured weakly?
-        return { instance -> Bool in
-            let value = self.valueForInstance(instance)
-            if self.selectedValues.count == 0 { return true }
-            return self.selectedValues.contains(value)
+    private var selectableFilter: NSPredicate? {
+        guard selectedValues.count > 0 else { return nil }
+        let predicates = selectedValues.map { (selectedValue) -> NSPredicate in
+            NSPredicate(format: "%K == %@", argumentArray: [attributeName, selectedValue])
         }
+        return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
     }
     
-    private var searchableFilter: (T) -> Bool {
-        return { (instance) -> Bool in
-            guard let searchText = self.searchText, searchText != "" else {
-                return true
-            }
-            let value = self.valueForInstance(instance)
-            return self.textSearchPredicate(value, searchText)
-        }
+    private var searchableFilter: NSPredicate? {
+        guard let searchText = searchText else { return nil }
+        return NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [attributeName, searchText])
     }
     
     func valueForInstance(_ instance: T) -> String {
@@ -102,4 +88,27 @@ class CoreDataQualBuilder<T>: Filtering, QualSelectable where T: NSManagedObject
     func setSearchText(_ text: String?) {
         searchText = text
     }
+    
+    // MARK: - CoreDataGeneralTextSearchable
+    func textSearchPredicateFor(text: String) -> NSPredicate? {
+        guard includeInGeneralSearch == true else { return nil }
+        return NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [attributeName, text])
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

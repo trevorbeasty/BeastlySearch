@@ -8,44 +8,55 @@
 
 import Foundation
 
-class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelection, CompositorBinding {
+class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, MacroSelection {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
     private let sortBuilders: [SortBuilder<T>]
+    private let macroBuilders: [MacroBuilder<T>]
+    private let defaultSortBuilder: SortBuilder<T>
+    let filterSort = Value<FilterSort<(T)>>()
     
     func didUpdate(_ builder: QuantBuilder<T>) {
-        executeBindings()
+        updateFilterSort()
     }
     
     func didUpdate(_ builder: QualBuilder<T>) {
-        executeBindings()
+        updateFilterSort()
     }
     
     func didSelectSortBuilder(_ builder: SortBuilder<T>) {
         sorter = builder.sorter
-        executeBindings()
+        updateFilterSort()
     }
     
-    private func executeBindings() {
-        let filterSort = FilterSort(filter: filter, sort: sorter)
-        activeBindings.forEach { (binding) in
-            binding(filterSort)
-        }
+    func didSelectMacroBuilder(_ builder: MacroBuilder<T>) {
+        let filterSort = FilterSort(
+            filter: builder.filter,
+            sorter: builder.sorter ?? defaultSortBuilder.sorter)
+        self.filterSort.value = filterSort
+    }
+    
+    private func updateFilterSort() {
+        self.filterSort.value = FilterSort(filter: filter, sorter: sorter)
     }
     
     // MARK: - Construction
-    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>]) {
+    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], macro: [MacroBuilder<T>], defaultSort: SortBuilder<T>) {
         self.quantBuilders = quant
         self.qualBuilders = qual
         self.sortBuilders = sort
+        self.macroBuilders = macro
+        self.defaultSortBuilder = defaultSort
+        sorter = defaultSortBuilder.sorter
     }
     
-    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>]) -> FilterCompositor<T> {
-        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort)
+    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>] = [], macro: [MacroBuilder<T>] = [], defaultSort: SortBuilder<T>) -> FilterCompositor<T> {
+        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort, macro: macro, defaultSort: defaultSort)
         quant.forEach({ $0.delegate = compositor })
         qual.forEach({ $0.delegate = compositor })
         sort.forEach({ $0.compositor = compositor })
+        macro.forEach({ $0.compositor = compositor })
         return compositor
     }
     
@@ -57,7 +68,7 @@ class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelect
         return qualBuilders as [QualSelectable]
     }
     var generalSearchText: String? {
-        didSet { executeBindings() }
+        didSet { updateFilterSort() }
     }
     
     func setGeneralSearchText(_ text: String?) {
@@ -67,7 +78,10 @@ class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelect
     // MARK: - SortSelection
     var sortSelectors: [SortSelectable] { return sortBuilders as [SortSelectable] }
     
-    // MARK: - Filter Output
+    // MARK: - MacroSelection
+    var macroSelectors: [MacroSelectable] { return macroBuilders as [MacroSelectable] }
+    
+    // MARK: - Filtering
     var filter: (T) -> Bool {
         return { (instance) -> Bool in
             return self.builderFilter(instance) && self.generalSearchTextFilter(instance)
@@ -75,7 +89,6 @@ class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelect
     }
     
     private var builderFilter: (T) -> Bool {
-        // capture self weakly?
         return { instance -> Bool in
             if self.quantBuilders.count == 0 && self.qualBuilders.count == 0 { return true }
             var match = true
@@ -103,23 +116,8 @@ class FilterCompositor<T>: FilterOutput, SortOutput, FilterSelection, SortSelect
         }
     }
     
-    // MARK: - Sort Output
-    var sorter: (((T), (T)) -> Bool)?
-    
-    // MARK: - CompositorBinding
-    private(set) var activeBindings: [(FilterSort<(T)>) -> Void] = []
-    
-    func bind(_ binding: @escaping ((FilterSort<(T)>) -> Void)) {
-        activeBindings.append(binding)
-    }
-    
-    func removeBinding(atIndex index: Int) throws -> (FilterSort<(T)>) -> Void {
-        return activeBindings.remove(at: index)
-    }
-    
-    func removeAllBindings() {
-        activeBindings.removeAll()
-    }
+    // MARK: - Sorting
+    private(set) var sorter: ((T), (T)) -> Bool
     
 }
 

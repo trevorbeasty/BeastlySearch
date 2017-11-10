@@ -9,13 +9,41 @@
 import UIKit
 import CoreData
 
+fileprivate enum Client {
+    case filterCompositor
+    case filterSelectorScene
+    case coreDataFilterCompositor
+    
+    var viewController: UIViewController {
+        switch self {
+        case .filterCompositor:
+            return FilterCompositorClient.usedCarExample()
+        case .filterSelectorScene:
+            return FilterSelectorSceneClient.usedCarsFilterSelectorScene()
+        case .coreDataFilterCompositor:
+            return CoreDataClient.carExample()
+        }
+    }
+    
+    static var nonInteractive: [Client] { return [.filterCompositor, .coreDataFilterCompositor] }
+    static var interactive: [Client] { return [.filterSelectorScene] }
+    
+    static func runNonInteractive() {
+        nonInteractive.forEach { (client) in
+            let _ = client.viewController
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    private let client: Client = .coreDataFilterCompositor
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window?.rootViewController = FilterSelectorSceneClient.usedCarsFilterSelectorScene
+        window?.rootViewController = Client.filterCompositor.viewController
         window?.makeKeyAndVisible()
         
         return true

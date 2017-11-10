@@ -6,40 +6,53 @@
 //  Copyright © 2017 Trevor Beasty. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class CoreDataClient {
     
-    static func carExample() {
-        let coreDataManager: CarCoreDataManager = CarCoreDataManager()
-        let cars = SISCar.allUsedCars()
-        cars.forEach { (car) in
-            do { try coreDataManager.saveCar(car) }
-            catch { print(error) }
-        }
+    static func carExample() -> UIViewController {
         
-        let price = CoreDataQuantBuilder(attributeName: "price", name: "Price")
-        let brand = CoreDataQualBuilder(attributeName: "make", name: "Brand")
-        let compositor = CoreDataFilterCompositor.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand])
-        
-        price.summarize()
-        brand.summarize()
-        
-        // bind
-        compositor.bind { (filteredPopulation) in
-            print("\n\n\n")
-            filteredPopulation.forEach({ print($0) })
+        return ClientUtilites.exampleWith(title: "Non-interactive CoreDataFilterCompositor", description: "Example construction and client interaction") {
+            // CoreData setup
+            let coreDataManager: CarCoreDataManager = CarCoreDataManager()
+            let cars = SISCar.allUsedCars()
+            cars.forEach { (car) in
+                do { try coreDataManager.saveCar(car) }
+                catch { print(error) }
+            }
+            
+            let price = CoreDataQuantBuilder<Car>(attributeName: "price", name: "Price")
+            let brand = CoreDataQualBuilder<Car>(attributeName: "make", name: "Brand", includeInGeneralSearch: true)
+            let model = CoreDataQualBuilder<Car>(attributeName: "model", name: "Model", includeInGeneralSearch: true)
+            let compositor = CoreDataFilterCompositor<Car>.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model])
+            
+            // print
+            price.summarize()
+            brand.summarize()
+            
+            Car.printCars(compositor.population, title: "All Cars")
+            
+            // bind
+            compositor.compositedPopulation.bind { (composited) in
+                guard let composited = composited else { return }
+                Car.printCars(composited, title: "Composited Cars")
+            }
+            
+            // select
+            price.selectMax(10000)
+            do {
+                try brand.selectValue("Ford")
+                try brand.selectValue("Honda")
+            }
+            catch {
+                print(error)
+            }
+            
+            compositor.setGeneralSearchText("n")
+            
+            return UIViewController()
         }
-        
-        // select
-        price.selectMax(10000)
-        do {
-            try brand.selectValue("Ford")
-            try brand.selectValue("Honda")
-        }
-        catch {
-            print(error)
-        }
+
     }
     
 }

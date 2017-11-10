@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 
-class CoreDataFilterCompositor<T>: FilterOutput, FilterSelection, PopulationBinding where T: NSManagedObject {
+class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection where T: NSManagedObject {
     let context: NSManagedObjectContext
     let entityName: String
     let quantBuilders: [CoreDataQuantBuilder<T>]
     let qualBuilders: [CoreDataQualBuilder<T>]
+    let compositedPopulation = Value<[T]>()
     
     private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>]) {
         self.context = context
@@ -33,89 +34,71 @@ class CoreDataFilterCompositor<T>: FilterOutput, FilterSelection, PopulationBind
         return compositor
     }
     
-    var population: [T] {
-        let request: NSFetchRequest<T> = NSFetchRequest<T>(entityName: entityName)
-        return try! context.fetch(request)
+    private func request(forPredicate predicate: NSPredicate? = nil) -> NSFetchRequest<T> {
+        let request = NSFetchRequest<T>(entityName: entityName)
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
+        return request
     }
     
-    // MARK: = FilterSelection
+    var population: [T] {
+        return try! context.fetch(request())
+    }
+    
+    // MARK: - FilterSelection
     var quantSelectors: [QuantSelectable] { return quantBuilders as [QuantSelectable] }
     var qualSelectors: [QualSelectable] { return qualBuilders as [QualSelectable] }
-    private(set) var generalSearchText: String?
+    private(set) var generalSearchText: String? {
+        didSet { updateCompositedPopulation() }
+    }
     
     func setGeneralSearchText(_ text: String?) {
         generalSearchText = text
     }
-    
-    // MARK: - Population Binding
-    var activeBindings: [([T]) -> Void] = []
-    
-    func bind(_ binding: @escaping ((([T])) -> Void)) {
-        activeBindings.append(binding)
-    }
-    
-    func removeBinding(atIndex index: Int) throws -> ((([T])) -> Void) {
-        return activeBindings.remove(at: index)
-    }
-    
-    func removeAllBindings() {
-        activeBindings.removeAll()
-    }
-    
+
     func didUpdate(_ builder: CoreDataQuantBuilder<T>) {
-        executeBindings()
+        updateCompositedPopulation()
     }
-    
+
     func didUpdate(_ builder: CoreDataQualBuilder<T>) {
-        executeBindings()
+        updateCompositedPopulation()
+    }
+
+    private func updateCompositedPopulation() {
+        let bindingRequest = request(forPredicate: filter)
+        let filteredPopulation: [T] = try! context.fetch(bindingRequest)
+        compositedPopulation.value = filteredPopulation
     }
     
-    private func executeBindings() {
-        let currentFilter = filter
-        let filteredPopulation = population.flatMap({ (instance) -> T? in
-            if currentFilter(instance) == true { return instance }
-            return nil
-        })
-        activeBindings.forEach { (binding) in
-            binding(filteredPopulation)
-        }
+    // MARK: - CoreDataFiltering
+    var filter: NSPredicate? {
+        let predicates = [builderPredicate, generalSearchTextPredicate].flatMap({ $0 })
+        guard predicates.count > 0 else { return nil }
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     }
     
-    // MARK: - FilterOutput
-    private var builderFilter: (T) -> Bool {
-        // capture self weakly?
-        return { instance -> Bool in
-            if self.quantBuilders.count == 0 && self.qualBuilders.count == 0 { return true }
-            var match = true
-            self.quantBuilders.forEach({ (quant) in
-                if quant.filter(instance) == false { match = false }
-            })
-            self.qualBuilders.forEach({ (qual) in
-                if qual.filter(instance) == false { match = false }
-            })
-            return match
-        }
+    private var coreDataFilters: [CoreDataFiltering] {
+        var filters = [CoreDataFiltering]()
+        filters.append(contentsOf: quantBuilders as [CoreDataFiltering])
+        filters.append(contentsOf: qualBuilders as [CoreDataFiltering])
+        return filters
     }
     
-    private var generalSearchTextFilter: (T) -> Bool {
-        return { (instance) -> Bool in
-            guard let searchText = self.generalSearchText, searchText != "" else {
-                return true
-            }
-            var match = false
-            self.qualBuilders.forEach({ (builder) in
-                guard builder.includeInGeneralSearch == true else { return }
-                let value = builder.valueForInstance(instance)
-                if builder.textSearchPredicate(value, searchText) == true { match = true }
-            })
-            return match
+    private var builderPredicate: NSPredicate? {
+        let predicates = coreDataFilters.flatMap { (filter) -> NSPredicate? in
+            filter.filter
         }
+        guard predicates.count > 0 else { return nil }
+        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
     }
     
-    var filter: (T) -> Bool {
-        return { (instance) -> Bool in
-            return self.builderFilter(instance) && self.generalSearchTextFilter(instance)
-        }
+    private var generalSearchTextPredicate: NSPredicate? {
+        guard let searchText = generalSearchText else { return nil }
+        let filters = qualBuilders as [CoreDataGeneralTextSearchable]
+        let predicates = filters.flatMap({ $0.textSearchPredicateFor(text: searchText) })
+        guard predicates.count > 0 else { return nil }
+        return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
     }
 }
 
