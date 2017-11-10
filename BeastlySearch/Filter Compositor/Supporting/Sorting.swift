@@ -12,3 +12,8 @@ protocol Sorting {
     associatedtype T
     var sorter: (T, T) -> Bool { get }
 }
+
+protocol OptionalSorting {
+    associatedtype T
+    var sorter: ((T, T) -> Bool)? { get }
+}

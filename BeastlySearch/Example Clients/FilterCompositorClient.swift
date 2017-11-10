@@ -30,7 +30,11 @@ class FilterCompositorClient {
             let mostExpensive = SortBuilder<SISCar>(name: "Most Expensive", sorter: { (car0, car1) -> Bool in
                 return car0.price > car1.price
             })
-            let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [cheapest, brandSort], defaultSort: mostExpensive)
+            let allUsedFilterSort = FilterSort<SISCar>(
+                filter: { (car) -> Bool in return true },
+                sorter: { (car0, car1) -> Bool in return car0.price > car1.price})
+            let allUsedMacro = MacroBuilder(name: "All Used Cars", filterSort: allUsedFilterSort)
+            let filterCompositor = FilterCompositor.compositorFor(quant: [mileage], qual: [brand, model], sort: [cheapest, brandSort], macro: [allUsedMacro], defaultSort: mostExpensive)
             
             // binding
             filterCompositor.filterSort.bind({ (filterSort) in
@@ -52,6 +56,8 @@ class FilterCompositorClient {
             
             cheapest.select()
             brandSort.select()
+            
+            allUsedMacro.select()
             
             return UIViewController()
         }

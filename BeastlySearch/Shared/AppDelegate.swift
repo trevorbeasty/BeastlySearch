@@ -43,8 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let client: Client = .coreDataFilterCompositor
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Client.runNonInteractive()
-        window?.rootViewController = Client.filterSelectorScene.viewController
+        window?.rootViewController = Client.filterCompositor.viewController
         window?.makeKeyAndVisible()
         
         return true

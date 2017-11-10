@@ -10,12 +10,12 @@ import Foundation
 
 struct FilterSort<T> {
     let filter: (T) -> Bool
-    let sort: ((T, T) -> Bool)?
+    let sorter: ((T, T) -> Bool)?
     
     func resultForPopulation(_ population: [T]) -> [T] {
         let filtered = population.filter(filter)
-        if let sort = sort {
-            return filtered.sorted(by: sort)
+        if let sorter = sorter {
+            return filtered.sorted(by: sorter)
         }
         return filtered
     }

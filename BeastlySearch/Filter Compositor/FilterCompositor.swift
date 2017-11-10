@@ -13,6 +13,7 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection {
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]
     private let sortBuilders: [SortBuilder<T>]
+    private let macroBuilders: [MacroBuilder<T>]
     private let defaultSortBuilder: SortBuilder<T>
     let filterSort = Value<FilterSort<(T)>>()
     
@@ -29,24 +30,33 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection {
         updateFilterSort()
     }
     
+    func didSelectMacroBuilder(_ builder: MacroBuilder<T>) {
+        let filterSort = FilterSort(
+            filter: builder.filter,
+            sorter: builder.sorter ?? defaultSortBuilder.sorter)
+        self.filterSort.value = filterSort
+    }
+    
     private func updateFilterSort() {
-        self.filterSort.value = FilterSort(filter: filter, sort: sorter)
+        self.filterSort.value = FilterSort(filter: filter, sorter: sorter)
     }
     
     // MARK: - Construction
-    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], defaultSort: SortBuilder<T>) {
+    private init(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], macro: [MacroBuilder<T>], defaultSort: SortBuilder<T>) {
         self.quantBuilders = quant
         self.qualBuilders = qual
         self.sortBuilders = sort
+        self.macroBuilders = macro
         self.defaultSortBuilder = defaultSort
         sorter = defaultSortBuilder.sorter
     }
     
-    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>], defaultSort: SortBuilder<T>) -> FilterCompositor<T> {
-        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort, defaultSort: defaultSort)
+    static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>] = [], macro: [MacroBuilder<T>] = [], defaultSort: SortBuilder<T>) -> FilterCompositor<T> {
+        let compositor = FilterCompositor<T>(quant: quant, qual: qual, sort: sort, macro: macro, defaultSort: defaultSort)
         quant.forEach({ $0.delegate = compositor })
         qual.forEach({ $0.delegate = compositor })
         sort.forEach({ $0.compositor = compositor })
+        macro.forEach({ $0.compositor = compositor })
         return compositor
     }
     
