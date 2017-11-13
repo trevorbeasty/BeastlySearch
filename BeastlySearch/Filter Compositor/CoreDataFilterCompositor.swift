@@ -19,21 +19,21 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSel
     let compositedPopulation = Value<[T]>()
     
     // MARK: - Construction
-    private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>) {
+    private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>, macroBuilders: [CoreDataMacroBuilder<T>] = []) {
         self.context = context
         self.entityName = entityName
         self.quantBuilders = quantBuilders
         self.qualBuilders = qualBuilders
         self.sortBuilders = sortBuilders
         self.defaultSortBuilder = defaultSortBuilder
-        self.sorters = defaultSortBuilder.sorters
     }
     
-    static func compositorWith(context: NSManagedObjectContext, entityName: String, quants: [CoreDataQuantBuilder<T>], quals: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>) -> CoreDataFilterCompositor {
-        let compositor = CoreDataFilterCompositor(context: context, entityName: entityName, quantBuilders: quants, qualBuilders: quals, sortBuilders: sortBuilders, defaultSortBuilder: defaultSortBuilder)
+    static func compositorWith(context: NSManagedObjectContext, entityName: String, quants: [CoreDataQuantBuilder<T>], quals: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>, macroBuilders: [CoreDataMacroBuilder<T>] = []) -> CoreDataFilterCompositor {
+        let compositor = CoreDataFilterCompositor(context: context, entityName: entityName, quantBuilders: quants, qualBuilders: quals, sortBuilders: sortBuilders, defaultSortBuilder: defaultSortBuilder, macroBuilders: macroBuilders)
         quants.forEach { (quant) in quant.compositor = compositor }
         quals.forEach { (qual) in qual.compositor = compositor }
         sortBuilders.forEach({ $0.compositor = compositor })
+        macroBuilders.forEach({ $0.compositor = compositor })
         return compositor
     }
     
@@ -66,9 +66,26 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSel
         updateCompositedPopulation()
     }
     
-    func didSelectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
-        self.sorters = builder.sorters
+    func selectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
+        selectedSortBuilder = builder
         updateCompositedPopulation()
+    }
+    
+    func deselectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
+        if builder == selectedSortBuilder {
+            selectedSortBuilder = nil
+            updateCompositedPopulation()
+        }
+    }
+    
+    func isSelected(_ builder: CoreDataSortBuilder<T>) -> Bool {
+        return builder == selectedSortBuilder
+    }
+    
+    func didSelectMacroBuilder(_ builder: CoreDataMacroBuilder<T>) {
+        let bindingRequest = request(forPredicate: builder.filter, sortDescriptors: builder.sorters)
+        let filteredPopulation: [T] = try! context.fetch(bindingRequest)
+        compositedPopulation.value = filteredPopulation
     }
     
     // MARK: - FilterSelection
@@ -116,7 +133,10 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSel
     }
     
     // MARK: - CoreDataSorting
-    private(set) var sorters: [NSSortDescriptor]
+    private var selectedSortBuilder: CoreDataSortBuilder<T>?
+    var sorters: [NSSortDescriptor] {
+        return selectedSortBuilder?.sorters ?? defaultSortBuilder.sorters
+    }
 }
 
 

@@ -43,6 +43,7 @@
 		0B6341541FB4D2B000093465 /* MacroBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341531FB4D2B000093465 /* MacroBuilder.swift */; };
 		0B6341561FB5DD2300093465 /* MacroSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341551FB5DD2300093465 /* MacroSelection.swift */; };
 		0B6341581FB5E9D800093465 /* CoreDataSortBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341571FB5E9D800093465 /* CoreDataSortBuilder.swift */; };
+		0B63415A1FBA172400093465 /* CoreDataMacroBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6341591FBA172400093465 /* CoreDataMacroBuilder.swift */; };
 		0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */; };
 		0B6725721FB23F5700526083 /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */; };
 		0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725731FB23F7E00526083 /* CoreDataClient.swift */; };
@@ -120,6 +121,7 @@
 		0B6341531FB4D2B000093465 /* MacroBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroBuilder.swift; sourceTree = "<group>"; };
 		0B6341551FB5DD2300093465 /* MacroSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacroSelection.swift; sourceTree = "<group>"; };
 		0B6341571FB5E9D800093465 /* CoreDataSortBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSortBuilder.swift; sourceTree = "<group>"; };
+		0B6341591FBA172400093465 /* CoreDataMacroBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMacroBuilder.swift; sourceTree = "<group>"; };
 		0B67256F1FB23F5700526083 /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0B6725701FB23F5700526083 /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0B6725731FB23F7E00526083 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */,
 				0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */,
 				0B6341571FB5E9D800093465 /* CoreDataSortBuilder.swift */,
+				0B6341591FBA172400093465 /* CoreDataMacroBuilder.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				0B23CEAE1FACC98D0094B9CB /* FilterCompositorClient.swift in Sources */,
 				0B7BD8501FB48F7100CDE0C4 /* CoreDataGeneralTextSearchable.swift in Sources */,
 				0BA6394D1FB484B4000AD521 /* Sorting.swift in Sources */,
+				0B63415A1FBA172400093465 /* CoreDataMacroBuilder.swift in Sources */,
 				0B23CEBF1FAD20350094B9CB /* QualFilterCell.swift in Sources */,
 				0B23CED51FB33EE00094B9CB /* CoreDataQualBuilder.swift in Sources */,
 				0B6725711FB23F5700526083 /* Car+CoreDataClass.swift in Sources */,

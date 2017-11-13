@@ -16,6 +16,7 @@ struct CoreDataSorter {
 
 class CoreDataSortBuilder<T>: CoreDataSorting, SortSelectable where T: NSManagedObject {
     let name: String
+    var isSelected: Bool { return compositor!.isSelected(self) }
     private let coreDataSorters: [CoreDataSorter]
     weak var compositor: CoreDataFilterCompositor<T>?
     var sorters: [NSSortDescriptor] {
@@ -30,6 +31,16 @@ class CoreDataSortBuilder<T>: CoreDataSorting, SortSelectable where T: NSManaged
     }
     
     func select() {
-        compositor?.didSelectSortBuilder(self)
+        compositor?.selectSortBuilder(self)
+    }
+    
+    func deselect() {
+        compositor?.deselectSortBuilder(self)
+    }
+}
+
+extension CoreDataSortBuilder: Equatable {
+    static func ==(lhs: CoreDataSortBuilder<T>, rhs: CoreDataSortBuilder<T>) -> Bool {
+        return lhs.name == rhs.name
     }
 }

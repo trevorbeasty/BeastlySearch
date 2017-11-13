@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        window?.rootViewController = Client.coreDataFilterCompositor.viewController
+        window?.rootViewController = Client.filterCompositor.viewController
         window?.makeKeyAndVisible()
         
         return true

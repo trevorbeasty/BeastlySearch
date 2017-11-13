@@ -25,9 +25,22 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, M
         updateFilterSort()
     }
     
-    func didSelectSortBuilder(_ builder: SortBuilder<T>) {
-        sorter = builder.sorter
+    func selectSortBuilder(_ builder: SortBuilder<T>) {
+        selectedSortBuilder = builder
         updateFilterSort()
+    }
+    
+    func deselectSortBuilder(_ builder: SortBuilder<T>) {
+        // only one sort builder should ever be selected at a time
+        // deselecting a sort builder selects the default sort, if one exists
+        if builder == selectedSortBuilder {
+            selectedSortBuilder = nil
+            updateFilterSort()
+        }
+    }
+    
+    func isSelected(_ builder: SortBuilder<T>) -> Bool {
+        return builder == selectedSortBuilder
     }
     
     func didSelectMacroBuilder(_ builder: MacroBuilder<T>) {
@@ -48,7 +61,6 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, M
         self.sortBuilders = sort
         self.macroBuilders = macro
         self.defaultSortBuilder = defaultSort
-        sorter = defaultSortBuilder.sorter
     }
     
     static func compositorFor(quant: [QuantBuilder<T>], qual: [QualBuilder<T>], sort: [SortBuilder<T>] = [], macro: [MacroBuilder<T>] = [], defaultSort: SortBuilder<T>) -> FilterCompositor<T> {
@@ -117,7 +129,10 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, M
     }
     
     // MARK: - Sorting
-    private(set) var sorter: ((T), (T)) -> Bool
+    private var selectedSortBuilder: SortBuilder<T>?
+    var sorter: ((T), (T)) -> Bool {
+        return selectedSortBuilder?.sorter ?? defaultSortBuilder.sorter
+    }
     
 }
 
