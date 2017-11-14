@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressive where T: NSManagedObject {
+class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressive, Updating where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
     }
@@ -49,6 +49,22 @@ class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressi
     
     // MARK: - QuantSelectable
     var min: Int {
+        get {
+            if _min == nil { _min = fetchMin() }
+            return _min!
+        }
+    }
+    private var _min: Int?
+    
+    var max: Int {
+        get {
+            if _max == nil { _max = fetchMax() }
+            return _max!
+        }
+    }
+    private var _max: Int?
+    
+    private func fetchMin() -> Int {
         var value = Int.max
         population.forEach({ instance in
             let currentValue = valueForInstance(instance)
@@ -57,7 +73,7 @@ class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressi
         return value
     }
     
-    var max: Int {
+    private func fetchMax() -> Int {
         var value = Int.min
         population.forEach({ instance in
             let currentValue = valueForInstance(instance)
@@ -83,4 +99,16 @@ class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressi
     func selectMax(_ value: Int) {
         self.selectedMax = value
     }
+    
+    // MARK: - Updating
+    func update() {
+        _min = fetchMin()
+        _max = fetchMax()
+    }
 }
+
+
+
+
+
+

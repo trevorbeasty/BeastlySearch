@@ -50,6 +50,7 @@
 		0B6725791FB2411C00526083 /* CarCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6725781FB2411C00526083 /* CarCoreDataManager.swift */; };
 		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
 		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
+		0B7A68951FBB28A40005F8EC /* Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A68941FBB28A40005F8EC /* Updating.swift */; };
 		0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */; };
 		0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */; };
 		0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */; };
@@ -128,6 +129,7 @@
 		0B6725781FB2411C00526083 /* CarCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarCoreDataManager.swift; sourceTree = "<group>"; };
 		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
+		0B7A68941FBB28A40005F8EC /* Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updating.swift; sourceTree = "<group>"; };
 		0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFiltering.swift; sourceTree = "<group>"; };
 		0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSorting.swift; sourceTree = "<group>"; };
 		0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTextSearchable.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		0B67257C1FB253AD00526083 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				0B7A68941FBB28A40005F8EC /* Updating.swift */,
 				0B23CED21FB33EC60094B9CB /* CoreDataQuantBuilder.swift */,
 				0B23CED41FB33EE00094B9CB /* CoreDataQualBuilder.swift */,
 				0B6341571FB5E9D800093465 /* CoreDataSortBuilder.swift */,
@@ -503,6 +506,7 @@
 				0BA639471FB3B68D000AD521 /* FilterSelectorVCSections.swift in Sources */,
 				0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */,
 				0B23CEC31FAD2A9A0094B9CB /* FilterSelectorRouter.swift in Sources */,
+				0B7A68951FBB28A40005F8EC /* Updating.swift in Sources */,
 				0B23CEB81FAD0C930094B9CB /* QuantFilterCell.swift in Sources */,
 				0B63414C1FB4AA8F00093465 /* FilterSort.swift in Sources */,
 				0B23CE681FACC64B0094B9CB /* AppDelegate.swift in Sources */,

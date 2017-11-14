@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneralTextSearchable where T: NSManagedObject {
+class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneralTextSearchable, Updating where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
     }
@@ -24,6 +24,17 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
     }
     
     var values: Set<String> {
+        get {
+            if _values == nil {
+                _values = fetchValues()
+            }
+            return _values!
+        }
+    }
+    
+    private var _values: Set<String>? 
+    
+    private func fetchValues() -> Set<String> {
         var values = Set<String>()
         population.forEach { (instance) in
             guard let value = instance.value(forKey: attributeName) as? String else { fatalError() }
@@ -35,6 +46,11 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
     private var population: [T] {
         guard let compositor = compositor else { fatalError() }
         return compositor.population
+    }
+    
+    // MARK: - Updating
+    func update() {
+        _values = fetchValues()
     }
     
     // MARK: - CoreDataFiltering
