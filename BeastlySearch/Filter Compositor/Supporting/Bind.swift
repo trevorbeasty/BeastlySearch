@@ -27,6 +27,8 @@ class Value<T>: Bindable {
     
     func bind(_ binding: @escaping (T?) -> Void) {
         bindings.append(binding)
+        // execute binding immediately
+        binding(value)
     }
     
     private func executeBindings() {
