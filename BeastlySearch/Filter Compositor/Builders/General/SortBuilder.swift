@@ -10,6 +10,7 @@ import Foundation
 
 class SortBuilder<T>: Sorting, SortSelectable {
     let name: String
+    var isSelected: Bool { return compositor!.isSelected(self) }
     let sorter: (T, T) -> Bool
     weak var compositor: FilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
@@ -21,6 +22,16 @@ class SortBuilder<T>: Sorting, SortSelectable {
     }
     
     func select() {
-        compositor?.didSelectSortBuilder(self)
+        compositor?.selectSortBuilder(self)
+    }
+    
+    func deselect() {
+        compositor?.deselectSortBuilder(self)
+    }
+}
+
+extension SortBuilder: Equatable {
+    static func ==(lhs: SortBuilder<T>, rhs: SortBuilder<T>) -> Bool {
+        return lhs.name == rhs.name
     }
 }

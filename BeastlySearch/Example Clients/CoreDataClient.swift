@@ -24,7 +24,17 @@ class CoreDataClient {
             let price = CoreDataQuantBuilder<Car>(attributeName: "price", name: "Price")
             let brand = CoreDataQualBuilder<Car>(attributeName: "make", name: "Brand", includeInGeneralSearch: true)
             let model = CoreDataQualBuilder<Car>(attributeName: "model", name: "Model", includeInGeneralSearch: true)
-            let compositor = CoreDataFilterCompositor<Car>.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model])
+            let mostExpensiveSorter = CoreDataSorter(attributeName: "price", ascending: false)
+            let mostExpensive = CoreDataSortBuilder<Car>(name: "Most Expensive", sorters: [mostExpensiveSorter])
+            let newestSorter = CoreDataSorter(attributeName: "year", ascending: false)
+            let cheapestSorter = CoreDataSorter(attributeName: "price", ascending: true)
+            let newest = CoreDataSortBuilder<Car>(name: "Newest", sorters: [newestSorter, cheapestSorter])
+            let newHonda = CoreDataMacroBuilder<Car>(
+                name: "New Honda's",
+                detail: "Honda's sorted by age",
+                filter: NSPredicate(format: "%K == %@", argumentArray: ["make", "Honda"]),
+                sorters: [NSSortDescriptor(key: "year", ascending: false)])
+            let compositor = CoreDataFilterCompositor<Car>.compositorWith(context: coreDataManager.context, entityName: "Car", quants: [price], quals: [brand, model], sortBuilders: [newest, mostExpensive], defaultSortBuilder: mostExpensive, macroBuilders: [newHonda])
             
             // print
             price.summarize()
@@ -47,8 +57,14 @@ class CoreDataClient {
             catch {
                 print(error)
             }
-            
+
             compositor.setGeneralSearchText("n")
+            newest.select()
+
+            newHonda.select()
+            
+            newest.select()
+            mostExpensive.select()
             
             return UIViewController()
         }

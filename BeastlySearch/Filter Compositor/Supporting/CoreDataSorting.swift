@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CoreDataSorting {
-    var sorter: NSSortDescriptor { get }
+    var sorters: [NSSortDescriptor] { get }
 }

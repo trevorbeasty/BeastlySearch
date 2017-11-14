@@ -9,41 +9,83 @@
 import Foundation
 import CoreData
 
-class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection where T: NSManagedObject {
+class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSelection, SortSelection where T: NSManagedObject {
     let context: NSManagedObjectContext
     let entityName: String
     let quantBuilders: [CoreDataQuantBuilder<T>]
     let qualBuilders: [CoreDataQualBuilder<T>]
+    let sortBuilders: [CoreDataSortBuilder<T>]
+    let defaultSortBuilder: CoreDataSortBuilder<T>
     let compositedPopulation = Value<[T]>()
     
-    private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>]) {
+    // MARK: - Construction
+    private init(context: NSManagedObjectContext, entityName: String, quantBuilders: [CoreDataQuantBuilder<T>], qualBuilders: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>, macroBuilders: [CoreDataMacroBuilder<T>] = []) {
         self.context = context
         self.entityName = entityName
         self.quantBuilders = quantBuilders
         self.qualBuilders = qualBuilders
+        self.sortBuilders = sortBuilders
+        self.defaultSortBuilder = defaultSortBuilder
     }
     
-    static func compositorWith(context: NSManagedObjectContext, entityName: String, quants: [CoreDataQuantBuilder<T>], quals: [CoreDataQualBuilder<T>]) -> CoreDataFilterCompositor {
-        let compositor = CoreDataFilterCompositor(context: context, entityName: entityName, quantBuilders: quants, qualBuilders: quals)
-        quants.forEach { (quant) in
-            quant.compositor = compositor
-        }
-        quals.forEach { (qual) in
-            qual.compositor = compositor
-        }
+    static func compositorWith(context: NSManagedObjectContext, entityName: String, quants: [CoreDataQuantBuilder<T>], quals: [CoreDataQualBuilder<T>], sortBuilders: [CoreDataSortBuilder<T>] = [], defaultSortBuilder: CoreDataSortBuilder<T>, macroBuilders: [CoreDataMacroBuilder<T>] = []) -> CoreDataFilterCompositor {
+        let compositor = CoreDataFilterCompositor(context: context, entityName: entityName, quantBuilders: quants, qualBuilders: quals, sortBuilders: sortBuilders, defaultSortBuilder: defaultSortBuilder, macroBuilders: macroBuilders)
+        quants.forEach { (quant) in quant.compositor = compositor }
+        quals.forEach { (qual) in qual.compositor = compositor }
+        sortBuilders.forEach({ $0.compositor = compositor })
+        macroBuilders.forEach({ $0.compositor = compositor })
         return compositor
     }
     
-    private func request(forPredicate predicate: NSPredicate? = nil) -> NSFetchRequest<T> {
+    private func updateCompositedPopulation() {
+        let bindingRequest = request(forPredicate: filter, sortDescriptors: sorters)
+        let filteredPopulation: [T] = try! context.fetch(bindingRequest)
+        compositedPopulation.value = filteredPopulation
+    }
+    
+    private func request(forPredicate predicate: NSPredicate? = nil, sortDescriptors: [NSSortDescriptor]? = nil) -> NSFetchRequest<T> {
         let request = NSFetchRequest<T>(entityName: entityName)
         if let predicate = predicate {
             request.predicate = predicate
+        }
+        if let sortDescriptors = sortDescriptors {
+            request.sortDescriptors = sortDescriptors
         }
         return request
     }
     
     var population: [T] {
         return try! context.fetch(request())
+    }
+    
+    func didUpdate(_ builder: CoreDataQuantBuilder<T>) {
+        updateCompositedPopulation()
+    }
+    
+    func didUpdate(_ builder: CoreDataQualBuilder<T>) {
+        updateCompositedPopulation()
+    }
+    
+    func selectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
+        selectedSortBuilder = builder
+        updateCompositedPopulation()
+    }
+    
+    func deselectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
+        if builder == selectedSortBuilder {
+            selectedSortBuilder = nil
+            updateCompositedPopulation()
+        }
+    }
+    
+    func isSelected(_ builder: CoreDataSortBuilder<T>) -> Bool {
+        return builder == selectedSortBuilder
+    }
+    
+    func didSelectMacroBuilder(_ builder: CoreDataMacroBuilder<T>) {
+        let bindingRequest = request(forPredicate: builder.filter, sortDescriptors: builder.sorters)
+        let filteredPopulation: [T] = try! context.fetch(bindingRequest)
+        compositedPopulation.value = filteredPopulation
     }
     
     // MARK: - FilterSelection
@@ -56,20 +98,9 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection where T: N
     func setGeneralSearchText(_ text: String?) {
         generalSearchText = text
     }
-
-    func didUpdate(_ builder: CoreDataQuantBuilder<T>) {
-        updateCompositedPopulation()
-    }
-
-    func didUpdate(_ builder: CoreDataQualBuilder<T>) {
-        updateCompositedPopulation()
-    }
-
-    private func updateCompositedPopulation() {
-        let bindingRequest = request(forPredicate: filter)
-        let filteredPopulation: [T] = try! context.fetch(bindingRequest)
-        compositedPopulation.value = filteredPopulation
-    }
+    
+    // MARK: - SortSelection
+    var sortSelectors: [SortSelectable] { return sortBuilders }
     
     // MARK: - CoreDataFiltering
     var filter: NSPredicate? {
@@ -94,11 +125,17 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, FilterSelection where T: N
     }
     
     private var generalSearchTextPredicate: NSPredicate? {
-        guard let searchText = generalSearchText else { return nil }
+        guard let searchText = generalSearchText, searchText != "" else { return nil }
         let filters = qualBuilders as [CoreDataGeneralTextSearchable]
         let predicates = filters.flatMap({ $0.textSearchPredicateFor(text: searchText) })
         guard predicates.count > 0 else { return nil }
         return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+    }
+    
+    // MARK: - CoreDataSorting
+    private var selectedSortBuilder: CoreDataSortBuilder<T>?
+    var sorters: [NSSortDescriptor] {
+        return selectedSortBuilder?.sorters ?? defaultSortBuilder.sorters
     }
 }
 

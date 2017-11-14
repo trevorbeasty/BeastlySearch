@@ -17,3 +17,4 @@ protocol OptionalSorting {
     associatedtype T
     var sorter: ((T, T) -> Bool)? { get }
 }
+

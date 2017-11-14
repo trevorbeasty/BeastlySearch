@@ -8,12 +8,6 @@
 
 import Foundation
 
-protocol MacroSelectable {
-    var name: String { get }
-    var detail: String? { get }
-    func select()
-}
-
 class MacroBuilder<T>: MacroSelectable, Filtering, OptionalSorting {
     let name: String
     let detail: String?
