@@ -70,7 +70,6 @@ class FilterSelectorSceneClient {
             // prints all cars initially, and filtered cars every time the filter updates
             SISCar.printCars(cars, title: "All cars")
             filterCompositor.filterSort.bind { (filterSort) in
-                guard let filterSort = filterSort else { return }
                 let compositedCars = filterSort.resultForPopulation(cars)
                 SISCar.printCars(compositedCars, title: "Composited cars")
             }

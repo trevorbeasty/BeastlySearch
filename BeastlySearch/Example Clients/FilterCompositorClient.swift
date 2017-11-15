@@ -38,9 +38,12 @@ class FilterCompositorClient {
             
             // binding
             filterCompositor.filterSort.bind({ (filterSort) in
-                guard let filterSort = filterSort else { return }
                 let compositedCars = filterSort.resultForPopulation(cars)
                 SISCar.printCars(compositedCars, title: "Composited cars")
+            })
+            
+            brand.selectedValues.bind({ (brands) in
+                print("\n\nselected brands: \(brands)\n\n")
             })
             
             // filter selection

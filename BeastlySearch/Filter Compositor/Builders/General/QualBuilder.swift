@@ -12,12 +12,9 @@ class QualBuilder<T>: Filtering, QualSelectable, GeneralTextSearchable {
     weak var delegate: FilterCompositor<T>?
     let keyPath: KeyPath<T,String>
     let group: QualGroup<T>
-    var selectedValues = Set<String>() {
-        didSet { delegate?.didUpdate(self) }
-    }
-    var searchText: String? {
-        didSet { delegate?.didUpdate(self) }
-    }
+    private(set) var values: Value<Set<String>>
+    private(set) var selectedValues: Value<Set<String>>
+    private(set) var searchText: Value<String?>
     let textSearchPredicate: TextSearchPredicate
     let includeInGeneralSearch: Bool
     
@@ -26,6 +23,17 @@ class QualBuilder<T>: Filtering, QualSelectable, GeneralTextSearchable {
         self.group = group
         self.textSearchPredicate = textSearchPredicate ?? QualBuilder.defaultTextSeachPredicate
         self.includeInGeneralSearch = includeInGeneralSearch
+        self.values = Value(group.values)
+        self.selectedValues = Value([])
+        self.searchText = Value(nil)
+        selectedValues.bind({ [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.delegate?.didUpdate(weakSelf)
+        })
+        searchText.bind({ [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.delegate?.didUpdate(weakSelf)
+        })
     }
     
     convenience init(keyPath: KeyPath<T,String>, name: String, population: [T], textSearchPredicate: TextSearchPredicate? = nil, includeInGeneralSearch: Bool = false) {
@@ -53,14 +61,14 @@ class QualBuilder<T>: Filtering, QualSelectable, GeneralTextSearchable {
         // should self be captured weakly?
         return { instance -> Bool in
             let value = instance[keyPath: self.keyPath]
-            if self.selectedValues.count == 0 { return true }
-            return self.selectedValues.contains(value)
+            if self.selectedValues.value.count == 0 { return true }
+            return self.selectedValues.value.contains(value)
         }
     }
     
     private var searchableFilter: (T) -> Bool {
         return { (instance) -> Bool in
-            guard let searchText = self.searchText, searchText != "" else {
+            guard let searchText = self.searchText.value, searchText != "" else {
                 return true
             }
             return self.textSearchPredicate(instance[keyPath: self.keyPath], searchText)
@@ -75,27 +83,26 @@ class QualBuilder<T>: Filtering, QualSelectable, GeneralTextSearchable {
     
     // MARK: - QualSelectable
     var name: String { return group.name }
-    var values: Set<String> { return group.values }
     
     func selectValue(_ value: String) throws {
         guard group.values.contains(value) else {
             throw QualSelectorError.invalidValue(value)
         }
-        selectedValues.insert(value)
+        selectedValues.value.insert(value)
     }
     
     func deselectValue(_ value: String) throws {
         guard group.values.contains(value) else {
             throw QualSelectorError.invalidValue(value)
         }
-        selectedValues.remove(value)
+        selectedValues.value.remove(value)
     }
     
     func deselectAll() {
-        selectedValues.removeAll()
+        selectedValues.value.removeAll()
     }
     
     func setSearchText(_ text: String?) {
-        searchText = text
+        searchText.value = text
     }
 }

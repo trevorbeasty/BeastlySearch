@@ -1,5 +1,5 @@
 //
-//  BuilderProtocols.swift
+//  Selectable.swift
 //  BeastlySearch
 //
 //  Created by Trevor Beasty on 11/3/17.
@@ -34,9 +34,9 @@ extension QuantSelectable {
 // MARK: - Qual
 protocol QualSelectable {
     var name: String { get }
-    var values: Set<String> { get }
-    var selectedValues: Set<String> { get }
-    var searchText: String? { get }
+    var values: Value<Set<String>> { get }
+    var selectedValues: Value<Set<String>> { get }
+    var searchText: Value<String?> { get }
     func selectValue(_ value: String) throws
     func deselectValue(_ value: String) throws
     func deselectAll()
