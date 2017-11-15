@@ -10,7 +10,7 @@ import Foundation
 
 class SortBuilder<T>: Sorting, SortSelectable {
     let name: String
-    var isSelected: Bool { return compositor!.isSelected(self) }
+    private(set) var isSelected: Value<Bool> = Value(false)
     let sorter: (T, T) -> Bool
     weak var compositor: FilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }

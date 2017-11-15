@@ -26,6 +26,9 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, M
     }
     
     func selectSortBuilder(_ builder: SortBuilder<T>) {
+        if selectedSortBuilder == builder { return }
+        selectedSortBuilder?.isSelected.value = false
+        builder.isSelected.value = true
         selectedSortBuilder = builder
         updateFilterSort()
     }
@@ -34,13 +37,10 @@ class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, M
         // only one sort builder should ever be selected at a time
         // deselecting a sort builder selects the default sort, if one exists
         if builder == selectedSortBuilder {
+            builder.isSelected.value = false
             selectedSortBuilder = nil
             updateFilterSort()
         }
-    }
-    
-    func isSelected(_ builder: SortBuilder<T>) -> Bool {
-        return builder == selectedSortBuilder
     }
     
     func didSelectMacroBuilder(_ builder: MacroBuilder<T>) {

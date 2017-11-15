@@ -75,19 +75,19 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSel
     }
     
     func selectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
+        if builder == selectedSortBuilder { return }
+        selectedSortBuilder?.isSelected.value = false
+        builder.isSelected.value = true
         selectedSortBuilder = builder
         updateCompositedPopulation()
     }
     
     func deselectSortBuilder(_ builder: CoreDataSortBuilder<T>) {
         if builder == selectedSortBuilder {
+            builder.isSelected.value = false
             selectedSortBuilder = nil
             updateCompositedPopulation()
         }
-    }
-    
-    func isSelected(_ builder: CoreDataSortBuilder<T>) -> Bool {
-        return builder == selectedSortBuilder
     }
     
     func didSelectMacroBuilder(_ builder: CoreDataMacroBuilder<T>) {

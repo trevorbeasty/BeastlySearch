@@ -56,6 +56,10 @@ class CoreDataClient {
                 print("\n\nselected brands: \(brands)\n\n")
             })
             
+            newest.isSelected.bind({ (isSelected) in
+                print("\n\nnewest is selected: \(isSelected)\n\n")
+            })
+            
             // select
             price.selectMax(10000)
             do {

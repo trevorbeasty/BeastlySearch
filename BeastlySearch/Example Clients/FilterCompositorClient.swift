@@ -51,6 +51,10 @@ class FilterCompositorClient {
                 print("\n\nselected brands: \(brands)\n\n")
             })
             
+            cheapest.isSelected.bind({ (isSelected) in
+                print("\n\ncheapest is selected: \(isSelected)\n\n")
+            })
+            
             // filter selection
             mileage.selectMax(100000)
             filterCompositor.setGeneralSearchText("i")

@@ -52,7 +52,7 @@ extension QualSelectable {
 // MARK: - Sort
 protocol SortSelectable {
     var name: String { get }
-    var isSelected: Bool { get }
+    var isSelected: Value<Bool> { get }
     func select()
     func deselect()
 }
