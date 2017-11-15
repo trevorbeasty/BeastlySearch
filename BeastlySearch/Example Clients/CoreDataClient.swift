@@ -44,9 +44,21 @@ class CoreDataClient {
             
             // bind
             compositor.compositedPopulation.bind { (composited) in
-                guard let composited = composited else { return }
                 Car.printCars(composited, title: "Composited Cars")
             }
+            
+            price.selectedMax.bind({ (max) in
+                guard let max = max else { return }
+                print("\n\nselected max: \(max)\n\n")
+            })
+            
+            brand.selectedValues.bind({ (brands) in
+                print("\n\nselected brands: \(brands)\n\n")
+            })
+            
+            newest.isSelected.bind({ (isSelected) in
+                print("\n\nnewest is selected: \(isSelected)\n\n")
+            })
             
             // select
             price.selectMax(10000)

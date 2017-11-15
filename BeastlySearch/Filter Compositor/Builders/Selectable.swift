@@ -1,5 +1,5 @@
 //
-//  BuilderProtocols.swift
+//  Selectable.swift
 //  BeastlySearch
 //
 //  Created by Trevor Beasty on 11/3/17.
@@ -17,10 +17,10 @@ protocol QuantExpressive {
 
 protocol QuantSelectable {
     var name: String { get }
-    var min: Int { get }
-    var max: Int { get }
-    var selectedMin: Int? { get }
-    var selectedMax: Int? { get }
+    var min: Value<Int> { get }
+    var max: Value<Int> { get }
+    var selectedMin: Value<Int?> { get }
+    var selectedMax: Value<Int?> { get }
     func selectMin(_ value: Int)
     func selectMax(_ value: Int)
 }
@@ -34,9 +34,9 @@ extension QuantSelectable {
 // MARK: - Qual
 protocol QualSelectable {
     var name: String { get }
-    var values: Set<String> { get }
-    var selectedValues: Set<String> { get }
-    var searchText: String? { get }
+    var values: Value<Set<String>> { get }
+    var selectedValues: Value<Set<String>> { get }
+    var searchText: Value<String?> { get }
     func selectValue(_ value: String) throws
     func deselectValue(_ value: String) throws
     func deselectAll()
@@ -52,7 +52,7 @@ extension QualSelectable {
 // MARK: - Sort
 protocol SortSelectable {
     var name: String { get }
-    var isSelected: Bool { get }
+    var isSelected: Value<Bool> { get }
     func select()
     func deselect()
 }

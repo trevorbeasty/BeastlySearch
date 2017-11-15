@@ -38,9 +38,21 @@ class FilterCompositorClient {
             
             // binding
             filterCompositor.filterSort.bind({ (filterSort) in
-                guard let filterSort = filterSort else { return }
                 let compositedCars = filterSort.resultForPopulation(cars)
                 SISCar.printCars(compositedCars, title: "Composited cars")
+            })
+            
+            mileage.selectedMax.bind({ (max) in
+                guard let max = max else { return }
+                print("\n\nselected max: \(max)\n\n")
+            })
+            
+            brand.selectedValues.bind({ (brands) in
+                print("\n\nselected brands: \(brands)\n\n")
+            })
+            
+            cheapest.isSelected.bind({ (isSelected) in
+                print("\n\ncheapest is selected: \(isSelected)\n\n")
             })
             
             // filter selection

@@ -12,34 +12,40 @@ import CoreData
 class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressive, Updating where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
+        didSet { update() }
     }
     let attributeName: String
     let name: String
     let converter: IntConverter
     let increment: Int
+    private(set) var min: Value<Int> = Value(Int.min)
+    private(set) var max: Value<Int> = Value(Int.max)
+    private(set) var selectedMin: Value<Int?> = Value(nil)
+    private(set) var selectedMax: Value<Int?> = Value(nil)
     
     init(attributeName: String, name: String, converter: IntConverter? = nil, increment: Int = 1) {
         self.attributeName = attributeName
         self.name = name
         self.converter = converter ?? { String($0) }
         self.increment = increment
-    }
-    
-    private(set) var selectedMin: Int? {
-        didSet { compositor?.didUpdate(self) }
-    }
-    private(set) var selectedMax: Int? {
-        didSet { compositor?.didUpdate(self) }
+        selectedMin.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.compositor?.didUpdate(weakSelf)
+        }
+        selectedMax.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.compositor?.didUpdate(weakSelf)
+        }
     }
     
     // MARK: - CoreDataFiltering
     var filter: NSPredicate? {
         var predicates = [NSPredicate]()
-        if let selectedMin = selectedMin {
+        if let selectedMin = selectedMin.value {
             let minPredicate = NSPredicate(format: "%K > %d", argumentArray: [attributeName, selectedMin])
             predicates.append(minPredicate)
         }
-        if let selectedMax = selectedMax {
+        if let selectedMax = selectedMax.value {
             let maxPredicate = NSPredicate(format: "%K < %d", argumentArray: [attributeName, selectedMax])
             predicates.append(maxPredicate)
         }
@@ -48,22 +54,6 @@ class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressi
     }
     
     // MARK: - QuantSelectable
-    var min: Int {
-        get {
-            if _min == nil { _min = fetchMin() }
-            return _min!
-        }
-    }
-    private var _min: Int?
-    
-    var max: Int {
-        get {
-            if _max == nil { _max = fetchMax() }
-            return _max!
-        }
-    }
-    private var _max: Int?
-    
     private func fetchMin() -> Int {
         var value = Int.max
         population.forEach({ instance in
@@ -93,17 +83,17 @@ class CoreDataQuantBuilder<T>: CoreDataFiltering, QuantSelectable, QuantExpressi
     }
     
     func selectMin(_ value: Int) {
-        self.selectedMin = value
+        self.selectedMin.value = value
     }
     
     func selectMax(_ value: Int) {
-        self.selectedMax = value
+        self.selectedMax.value = value
     }
     
     // MARK: - Updating
     func update() {
-        _min = fetchMin()
-        _max = fetchMax()
+        min.value = fetchMin()
+        max.value = fetchMax()
     }
 }
 

@@ -16,7 +16,7 @@ struct CoreDataSorter {
 
 class CoreDataSortBuilder<T>: CoreDataSorting, SortSelectable where T: NSManagedObject {
     let name: String
-    var isSelected: Bool { return compositor!.isSelected(self) }
+    private(set) var isSelected: Value<Bool> = Value(false)
     private let coreDataSorters: [CoreDataSorter]
     weak var compositor: CoreDataFilterCompositor<T>?
     var sorters: [NSSortDescriptor] {

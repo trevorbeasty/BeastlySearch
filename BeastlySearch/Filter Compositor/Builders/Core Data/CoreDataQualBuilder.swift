@@ -12,27 +12,31 @@ import CoreData
 class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneralTextSearchable, Updating where T: NSManagedObject {
     weak var compositor: CoreDataFilterCompositor<T>? {
         willSet { if compositor != nil { fatalError() } }
+        didSet { update() }
     }
     let attributeName: String
     let name: String
     let includeInGeneralSearch: Bool
+    private(set) var values: Value<Set<String>>
+    private(set) var selectedValues: Value<Set<String>>
+    private(set) var searchText: Value<String?>
     
     init(attributeName: String, name: String, includeInGeneralSearch: Bool = false){
         self.attributeName = attributeName
         self.name = name
         self.includeInGeneralSearch = includeInGeneralSearch
-    }
-    
-    var values: Set<String> {
-        get {
-            if _values == nil {
-                _values = fetchValues()
-            }
-            return _values!
+        self.values = Value([])
+        self.selectedValues = Value([])
+        self.searchText = Value(nil)
+        self.selectedValues.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.compositor?.didUpdate(weakSelf)
+        }
+        self.searchText.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.compositor?.didUpdate(weakSelf)
         }
     }
-    
-    private var _values: Set<String>? 
     
     private func fetchValues() -> Set<String> {
         var values = Set<String>()
@@ -50,7 +54,7 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
     
     // MARK: - Updating
     func update() {
-        _values = fetchValues()
+        values.value = fetchValues()
     }
     
     // MARK: - CoreDataFiltering
@@ -61,15 +65,15 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
     }
     
     private var selectableFilter: NSPredicate? {
-        guard selectedValues.count > 0 else { return nil }
-        let predicates = selectedValues.map { (selectedValue) -> NSPredicate in
+        guard selectedValues.value.count > 0 else { return nil }
+        let predicates = selectedValues.value.map { (selectedValue) -> NSPredicate in
             NSPredicate(format: "%K == %@", argumentArray: [attributeName, selectedValue])
         }
         return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
     }
     
     private var searchableFilter: NSPredicate? {
-        guard let searchText = searchText else { return nil }
+        guard let searchText = searchText.value else { return nil }
         return NSPredicate(format: "%K CONTAINS[c] %@", argumentArray: [attributeName, searchText])
     }
     
@@ -80,29 +84,22 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
 
     
     // MARK: - QualSelectable
-    private(set) var selectedValues = Set<String>() {
-        didSet { compositor?.didUpdate(self) }
-    }
-    private(set) var searchText: String? {
-        didSet { compositor?.didUpdate(self) }
-    }
-    
     func selectValue(_ value: String) throws {
-        guard values.contains(value) else { throw QualSelectorError.invalidValue(value) }
-        selectedValues.insert(value)
+        guard values.value.contains(value) else { throw QualSelectorError.invalidValue(value) }
+        selectedValues.value.insert(value)
     }
     
     func deselectValue(_ value: String) throws {
-        guard values.contains(value) else { throw QualSelectorError.invalidValue(value) }
-        selectedValues.remove(value)
+        guard values.value.contains(value) else { throw QualSelectorError.invalidValue(value) }
+        selectedValues.value.remove(value)
     }
     
     func deselectAll() {
-        selectedValues.removeAll()
+        selectedValues.value.removeAll()
     }
     
     func setSearchText(_ text: String?) {
-        searchText = text
+        searchText.value = text
     }
     
     // MARK: - CoreDataGeneralTextSearchable

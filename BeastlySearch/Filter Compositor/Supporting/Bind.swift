@@ -10,22 +10,26 @@ import Foundation
 
 protocol Bindable {
     associatedtype T
-    var value: T? { get }
-    var bindings: [(T?) -> Void] { get }
-    func bind(_ binding: @escaping (T?) -> Void)
-    func removeBinding(atIndex index: Int) -> ((T?) -> Void)
+    var value: T { get }
+    var bindings: [(T) -> Void] { get }
+    func bind(_ binding: @escaping (T) -> Void)
+    func removeBinding(atIndex index: Int) -> ((T) -> Void)
     func removeAllBindings()
 }
 
 class Value<T>: Bindable {
-    var value: T? {
+    var value: T {
         didSet { executeBindings() }
     }
     
-    // MARK: - Bindable
-    private(set) var bindings: [(T?) -> Void] = []
+    init(_ value: T) {
+        self.value = value
+    }
     
-    func bind(_ binding: @escaping (T?) -> Void) {
+    // MARK: - Bindable
+    private(set) var bindings: [(T) -> Void] = []
+    
+    func bind(_ binding: @escaping (T) -> Void) {
         bindings.append(binding)
         // execute binding immediately
         binding(value)
@@ -37,7 +41,7 @@ class Value<T>: Bindable {
         }
     }
     
-    func removeBinding(atIndex index: Int) -> ((T?) -> Void) {
+    func removeBinding(atIndex index: Int) -> ((T) -> Void) {
         return bindings.remove(at: index)
     }
     

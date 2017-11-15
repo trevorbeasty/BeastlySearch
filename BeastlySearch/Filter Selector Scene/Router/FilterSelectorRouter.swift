@@ -28,7 +28,7 @@ class FilterSelectorRouter {
                 return SectionType.quant(quantInfo)
 
             case .qual(let qualSelectable):
-                let values = Array(qualSelectable.values)
+                let values = Array(qualSelectable.values.value)
                 let qualInfo = QualSectionInfo(name: qualSelectable.name, values: values)
                 return SectionType.qual(qualInfo)
                 

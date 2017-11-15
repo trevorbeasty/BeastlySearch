@@ -14,7 +14,7 @@
 		0B23CE751FACC64B0094B9CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B23CE731FACC64B0094B9CB /* LaunchScreen.storyboard */; };
 		0B23CE801FACC64C0094B9CB /* BeastlySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE7F1FACC64C0094B9CB /* BeastlySearchTests.swift */; };
 		0B23CE8B1FACC64C0094B9CB /* BeastlySearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */; };
-		0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */; };
+		0B23CE9D1FACC7CF0094B9CB /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CE9C1FACC7CF0094B9CB /* Selectable.swift */; };
 		0B23CEA11FACC8180094B9CB /* QuantBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */; };
 		0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA21FACC8230094B9CB /* QuantGroup.swift */; };
 		0B23CEA51FACC82D0094B9CB /* QualBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */; };
@@ -51,6 +51,7 @@
 		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
 		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
 		0B7A68951FBB28A40005F8EC /* Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A68941FBB28A40005F8EC /* Updating.swift */; };
+		0B7A68AC1FBC9DD20005F8EC /* CompositorReactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */; };
 		0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */; };
 		0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */; };
 		0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */; };
@@ -93,7 +94,7 @@
 		0B23CE861FACC64C0094B9CB /* BeastlySearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeastlySearchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B23CE8A1FACC64C0094B9CB /* BeastlySearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeastlySearchUITests.swift; sourceTree = "<group>"; };
 		0B23CE8C1FACC64C0094B9CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocols.swift; sourceTree = "<group>"; };
+		0B23CE9C1FACC7CF0094B9CB /* Selectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		0B23CEA01FACC8180094B9CB /* QuantBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantBuilder.swift; sourceTree = "<group>"; };
 		0B23CEA21FACC8230094B9CB /* QuantGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantGroup.swift; sourceTree = "<group>"; };
 		0B23CEA41FACC82D0094B9CB /* QualBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualBuilder.swift; sourceTree = "<group>"; };
@@ -130,6 +131,7 @@
 		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
 		0B7A68941FBB28A40005F8EC /* Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updating.swift; sourceTree = "<group>"; };
+		0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositorReactive.swift; sourceTree = "<group>"; };
 		0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFiltering.swift; sourceTree = "<group>"; };
 		0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSorting.swift; sourceTree = "<group>"; };
 		0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTextSearchable.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		0B23CE981FACC7070094B9CB /* Filter Compositor */ = {
 			isa = PBXGroup;
 			children = (
+				0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
 				0B7BD8511FB49BE300CDE0C4 /* Supporting */,
@@ -246,7 +249,7 @@
 		0B23CE9B1FACC7BC0094B9CB /* Builders */ = {
 			isa = PBXGroup;
 			children = (
-				0B23CE9C1FACC7CF0094B9CB /* BuilderProtocols.swift */,
+				0B23CE9C1FACC7CF0094B9CB /* Selectable.swift */,
 				0B23CEA81FACC8F20094B9CB /* BuilderErrors.swift */,
 				0B23CECD1FB3395D0094B9CB /* General */,
 				0B67257C1FB253AD00526083 /* Core Data */,
@@ -498,7 +501,7 @@
 				0BA639491FB3B75D000AD521 /* SortHeaderView.swift in Sources */,
 				0B6341561FB5DD2300093465 /* MacroSelection.swift in Sources */,
 				0B6341521FB4AC3500093465 /* ClientUtilities.swift in Sources */,
-				0B23CE9D1FACC7CF0094B9CB /* BuilderProtocols.swift in Sources */,
+				0B23CE9D1FACC7CF0094B9CB /* Selectable.swift in Sources */,
 				0BA639431FB39F2C000AD521 /* SortBuilder.swift in Sources */,
 				0B6341541FB4D2B000093465 /* MacroBuilder.swift in Sources */,
 				0B6341581FB5E9D800093465 /* CoreDataSortBuilder.swift in Sources */,
@@ -514,6 +517,7 @@
 				0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */,
 				0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */,
 				0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */,
+				0B7A68AC1FBC9DD20005F8EC /* CompositorReactive.swift in Sources */,
 				0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
 				0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */,
