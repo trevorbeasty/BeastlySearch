@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FilterCompositor<T>: Filtering, Sorting, FilterSelection, SortSelection, MacroSelection {
+class FilterCompositor<T>: Filtering, Sorting, FilterSortReactive, FilterSelection, SortSelection, MacroSelection {
     
     private let quantBuilders: [QuantBuilder<T>]
     private let qualBuilders: [QualBuilder<T>]

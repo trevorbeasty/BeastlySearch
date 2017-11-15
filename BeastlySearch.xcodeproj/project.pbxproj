@@ -51,6 +51,7 @@
 		0B67257B1FB242AA00526083 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B67257A1FB242AA00526083 /* Default-568h@2x.png */; };
 		0B67257E1FB253CE00526083 /* CoreDataFilterCompositor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */; };
 		0B7A68951FBB28A40005F8EC /* Updating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A68941FBB28A40005F8EC /* Updating.swift */; };
+		0B7A68AC1FBC9DD20005F8EC /* CompositorReactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */; };
 		0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */; };
 		0B7BD84C1FB4870600CDE0C4 /* CoreDataSorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */; };
 		0B7BD84E1FB48F5700CDE0C4 /* GeneralTextSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */; };
@@ -130,6 +131,7 @@
 		0B67257A1FB242AA00526083 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFilterCompositor.swift; sourceTree = "<group>"; };
 		0B7A68941FBB28A40005F8EC /* Updating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updating.swift; sourceTree = "<group>"; };
+		0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositorReactive.swift; sourceTree = "<group>"; };
 		0B7BD8491FB486F000CDE0C4 /* CoreDataFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataFiltering.swift; sourceTree = "<group>"; };
 		0B7BD84B1FB4870600CDE0C4 /* CoreDataSorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSorting.swift; sourceTree = "<group>"; };
 		0B7BD84D1FB48F5700CDE0C4 /* GeneralTextSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTextSearchable.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		0B23CE981FACC7070094B9CB /* Filter Compositor */ = {
 			isa = PBXGroup;
 			children = (
+				0B7A68AB1FBC9DD20005F8EC /* CompositorReactive.swift */,
 				0B23CEAA1FACC9350094B9CB /* FilterCompositor.swift */,
 				0B67257D1FB253CE00526083 /* CoreDataFilterCompositor.swift */,
 				0B7BD8511FB49BE300CDE0C4 /* Supporting */,
@@ -514,6 +517,7 @@
 				0B23CED31FB33EC60094B9CB /* CoreDataQuantBuilder.swift in Sources */,
 				0B23CEB11FACCBE90094B9CB /* SISCar.swift in Sources */,
 				0B6725741FB23F7E00526083 /* CoreDataClient.swift in Sources */,
+				0B7A68AC1FBC9DD20005F8EC /* CompositorReactive.swift in Sources */,
 				0B7BD84A1FB486F000CDE0C4 /* CoreDataFiltering.swift in Sources */,
 				0B23CEA31FACC8230094B9CB /* QuantGroup.swift in Sources */,
 				0BA6394B1FB47F20000AD521 /* Filtering.swift in Sources */,

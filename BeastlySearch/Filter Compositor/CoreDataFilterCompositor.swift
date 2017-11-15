@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, FilterSelection, SortSelection, MacroSelection where T: NSManagedObject {
+class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, PopulationReactive, FilterSelection, SortSelection, MacroSelection where T: NSManagedObject {
     let context: NSManagedObjectContext
     let entityName: String
     let quantBuilders: [CoreDataQuantBuilder<T>]
