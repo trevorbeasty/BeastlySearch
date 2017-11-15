@@ -17,9 +17,9 @@ class CoreDataQualBuilder<T>: CoreDataFiltering, QualSelectable, CoreDataGeneral
     let attributeName: String
     let name: String
     let includeInGeneralSearch: Bool
-    var values: Value<Set<String>>
-    var selectedValues: Value<Set<String>>
-    var searchText: Value<String?>
+    private(set) var values: Value<Set<String>>
+    private(set) var selectedValues: Value<Set<String>>
+    private(set) var searchText: Value<String?>
     
     init(attributeName: String, name: String, includeInGeneralSearch: Bool = false){
         self.attributeName = attributeName

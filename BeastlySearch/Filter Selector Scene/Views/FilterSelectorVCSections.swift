@@ -49,8 +49,8 @@ struct QuantSectionInfo: OpenClose {
 extension QuantSectionInfo {
     init(quant: QuantSelectable & QuantExpressive, isOpen: Bool = true, selectedMin: Int? = nil, selectedMax: Int? = nil) {
         self.name = quant.name
-        self.min = quant.min
-        self.max = quant.max
+        self.min = quant.min.value
+        self.max = quant.max.value
         self.converter = quant.converter
         self.increment = quant.increment
         self.isOpen = isOpen

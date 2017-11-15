@@ -11,22 +11,30 @@ import Foundation
 class QuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive {
     // client could potentially derail system by setting delegate after FilterCompositor construction
     weak var delegate: FilterCompositor<T>?
+    let name: String
     let keyPath: KeyPath<T,Int>
-    let group: QuantGroup<T>
     let converter: IntConverter
     let increment: Int
-    var selectedMin: Int? {
-        didSet { delegate?.didUpdate(self) }
-    }
-    var selectedMax: Int? {
-        didSet { delegate?.didUpdate(self) }
-    }
+    private(set) var min: Value<Int>
+    private(set) var max: Value<Int>
+    private(set) var selectedMin: Value<Int?> = Value(nil)
+    private(set) var selectedMax: Value<Int?> = Value(nil)
     
     init(keyPath: KeyPath<T,Int>, group: QuantGroup<T>, converter: IntConverter? = nil, increment: Int = 1) {
+        self.name = group.name
         self.keyPath = keyPath
-        self.group = group
         self.converter = converter ?? { String($0) }
         self.increment = increment
+        self.min = Value(group.min)
+        self.max = Value(group.max)
+        selectedMin.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.delegate?.didUpdate(weakSelf)
+        }
+        selectedMax.bind { [weak self] _ in
+            guard let weakSelf = self else { return }
+            weakSelf.delegate?.didUpdate(weakSelf)
+        }
     }
     
     convenience init(keyPath: KeyPath<T,Int>, name: String, population: [T], converter: IntConverter? = nil, increment: Int = 1) {
@@ -52,10 +60,10 @@ class QuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive {
         return { instance -> Bool in
             let value = instance[keyPath: self.keyPath]
             var match = true
-            if let max = self.selectedMax {
+            if let max = self.selectedMax.value {
                 match = match && value < max
             }
-            if let min = self.selectedMin {
+            if let min = self.selectedMin.value {
                 match = match && value > min
             }
             return match
@@ -63,22 +71,12 @@ class QuantBuilder<T>: Filtering, QuantSelectable, QuantExpressive {
     }
     
     // MARK: - QuantSelectable
-    var name: String {
-        return group.name
-    }
-    var min: Int {
-        return group.min
-    }
-    var max: Int {
-        return group.max
-    }
-    
     func selectMin(_ value: Int) {
-        selectedMin = value
+        selectedMin.value = value
     }
     
     func selectMax(_ value: Int) {
-        selectedMax = value
+        selectedMax.value = value
     }
 }
 

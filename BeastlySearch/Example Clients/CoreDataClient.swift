@@ -47,6 +47,11 @@ class CoreDataClient {
                 Car.printCars(composited, title: "Composited Cars")
             }
             
+            price.selectedMax.bind({ (max) in
+                guard let max = max else { return }
+                print("\n\nselected max: \(max)\n\n")
+            })
+            
             brand.selectedValues.bind({ (brands) in
                 print("\n\nselected brands: \(brands)\n\n")
             })

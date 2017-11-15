@@ -17,10 +17,10 @@ protocol QuantExpressive {
 
 protocol QuantSelectable {
     var name: String { get }
-    var min: Int { get }
-    var max: Int { get }
-    var selectedMin: Int? { get }
-    var selectedMax: Int? { get }
+    var min: Value<Int> { get }
+    var max: Value<Int> { get }
+    var selectedMin: Value<Int?> { get }
+    var selectedMax: Value<Int?> { get }
     func selectMin(_ value: Int)
     func selectMax(_ value: Int)
 }
