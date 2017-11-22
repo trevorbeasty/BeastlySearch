@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, PopulationReactive, FilterSelection, SortSelection, MacroSelection where T: NSManagedObject {
+class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, PopulationReactive, FilterSelection, SortSelection, MacroSelection, Updating where T: NSManagedObject {
     let context: NSManagedObjectContext
     let entityName: String
     let quantBuilders: [CoreDataQuantBuilder<T>]
@@ -156,6 +156,13 @@ class CoreDataFilterCompositor<T>: CoreDataFiltering, CoreDataSorting, Populatio
     
     // MARK: - MacroSelection
     var macroSelectors: [MacroSelectable] { return macroBuilders as [MacroSelectable] }
+    
+    // MARK: - Updating
+    func update() {
+        quantBuilders.forEach({ $0.update() })
+        qualBuilders.forEach({ $0.update() })
+        updateCompositedPopulation()
+    }
 }
 
 
